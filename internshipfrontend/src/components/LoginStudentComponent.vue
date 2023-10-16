@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <AppNavbar/>
   <div class="componentRegistroStudent">
   <div class="container">
     <div class="title">
@@ -64,8 +66,10 @@
         <button type="submit" value="REGISTRARSE" @click="login">Registrarse </button>
       </div>
     </form>
+    </div>
   </div>
 </div>
+
 </template>
 
 <style>
@@ -254,9 +258,15 @@ form .button button:hover {
 <script>
 
 import LoginStudentAPI from '../services/LoginStudentAPI.js';
+import AppNavbar from  '../components/AppNavbar.vue';
 
 export default {
+  components:{
+    AppNavbar,
+  },
   mixins: [LoginStudentAPI],
-};
+};   
+
+
 
 </script>

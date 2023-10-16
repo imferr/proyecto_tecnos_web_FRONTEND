@@ -1,4 +1,6 @@
 <template>
+    <div>
+    <AppNavbar/>
         <section>
           <div class="slide">
                 <div class="slide-inner">
@@ -98,6 +100,7 @@
         <footer>
             <p>Derechos de autor © 2023 Internship Grupo 2 :D</p>
         </footer>
+    </div>
     </template>
     
     <style>
@@ -431,8 +434,12 @@ body {
     <script>
 
     import HomePageAPI from '../services/HomePageAPI.js';
+    import AppNavbar from  '../components/AppNavbar.vue';
     
     export default {
+        components:{
+    AppNavbar,
+  },
       mixins: [HomePageAPI],
     };
     
