@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeComponent from '../components/HomeComponent.vue';
-import LoginStudentComponent from '../components/LoginStudentComponent.vue';
+
+import LoginComponent from '../components/LoginComponent.vue';
+import RegistroAdminComponent from '../components/RegistroAdmin.vue';
 
 
 const routes = [
-    { path : '/', component: LoginStudentComponent, name: 'login' },
+    { path : '/login', component: LoginComponent, name: 'login' },
     { path : '/home', component: HomeComponent, name: 'home' },
+
+    { path: '/registro-admin', component: RegistroAdminComponent, name: 'registroAdmin' },
+
 ];
 
 const router = createRouter({
