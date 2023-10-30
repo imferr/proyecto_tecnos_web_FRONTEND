@@ -52,7 +52,7 @@
                 <a href="#">
                     <span class="pre-heading">INTERNSHIP UCB</span>
                     <div class="title">
-                        <h3>Aprende a través de la experiencia! Elige una de nuestra amplia variedad de pasantias basadas en el trabajo, servicio comunitario y colaboraciones de investigacion practica que te ayudaran a aplicar tus conocimientos y adquirir habilidades que te destacaran. </h3>
+                        <h1>Aprende a través de la experiencia! Elige una de nuestra amplia variedad de pasantias basadas en el trabajo, servicio comunitario y colaboraciones de investigacion practica que te ayudaran a aplicar tus conocimientos y adquirir habilidades que te destacaran. </h1>
                     </div>
                 </a>
             </header>
@@ -249,7 +249,7 @@ body {
             } 
     .card {
       box-shadow: 0 0px 1px rgba(0, 0, 0, 0.10), 0 2px 2px rgba(0, 0, 0, 0.10);
-      background: #aba8a8;
+      background: #7a787886;
       border-radius: 20px;
       display: flex;
       flex-direction: column;

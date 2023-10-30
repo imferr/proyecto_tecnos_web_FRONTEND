@@ -2,13 +2,22 @@
     <nav class="AppNavbar">
       <ul>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
-          <router-link to="/">Inicio</router-link>
+          <router-link to="/home">Inicio</router-link>
         </li>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
-          <router-link to="/login">Login</router-link>
+          <router-link to="/">Perfil</router-link>
         </li>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
-          <router-link to="/registro">Registro</router-link>
+          <router-link to="/convocatoria">Bolsa de trabajo</router-link>
+        </li>
+        <li @mouseover="hovered = true" @mouseout="hovered = false">
+          <router-link to="/eventos">Convenios/Pasantias</router-link>
+        </li>
+        <li @mouseover="hovered = true" @mouseout="hovered = false">
+          <router-link to="/registro">Promociones</router-link>
+        </li>
+        <li @mouseover="hovered = true" @mouseout="hovered = false">
+          <router-link to="/registro">Contacto</router-link>
         </li>
       </ul>
     </nav>
