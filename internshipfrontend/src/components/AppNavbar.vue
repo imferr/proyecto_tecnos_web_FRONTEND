@@ -14,10 +14,10 @@
           <router-link to="/eventos">Convenios/Pasantias</router-link>
         </li>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
-          <router-link to="/registro">Promociones</router-link>
+          <router-link to="/registroConvocatoria">Promociones</router-link>
         </li>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
-          <router-link to="/registro">Contacto</router-link>
+          <router-link to="/solicitudPasantia">Contacto</router-link>
         </li>
       </ul>
     </nav>

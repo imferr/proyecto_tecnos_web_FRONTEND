@@ -2,10 +2,11 @@
     <div>
       <AppNavbar/>
       <div class="componentAgregarEventos">
-        <div class="container">
+        <div class="gray-container">
           <div class="title">
-            <p>Añadir eventos</p>
+            <h2>Añadir eventos</h2>  
           </div>
+        <div class="container">
           <form action="#">
             <div class="user__details">
               <div class="input__box">
@@ -32,6 +33,7 @@
           </form>
         </div>
       </div>
+      </div>
     </div>
   </template>
 <style>
@@ -57,6 +59,18 @@
   width: auto;  
   margin-right: 10px; 
 }
+.gray-container {
+  width: 60%; 
+  background-color: rgba(234, 229, 229, 0.621); 
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px; 
+  }
+  .gray-container > div > h2 {
+  margin-bottom: 10px; 
+  }
+  
 .componentAgregarEventos{
   display: flex;
   height: 100vh;
@@ -68,7 +82,6 @@
   background-position: center; 
   background-repeat: no-repeat;
 }
-
 
 /* contenedores y formas */
 .container {
