@@ -8,13 +8,13 @@
           <router-link to="/">Perfil</router-link>
         </li>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
-          <router-link to="/convocatoria">Bolsa de trabajo</router-link>
+          <router-link to="/mainBolsaTrabajo">Bolsa de trabajo</router-link>
         </li>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
           <router-link to="/eventos">Convenios/Pasantias</router-link>
         </li>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
-          <router-link to="/registroConvocatoria">Promociones</router-link>
+          <router-link to="/">Promociones</router-link>
         </li>
         <li @mouseover="hovered = true" @mouseout="hovered = false">
           <router-link to="/solicitudPasantia">Contacto</router-link>

@@ -44,7 +44,7 @@
             </div>
             <div class="button">
               <button type="submit" value="AÑADIR" @click="eventos">Añadir</button>
-              <button type="reset" value="CANCELAR" @click="cancel">Cancelar</button>
+              <button type="reset" value="CANCELAR" @click="cancelar">Cancelar</button>
             </div>
           </form>
         </div>
@@ -92,8 +92,6 @@
     background-position: center; 
     background-repeat: no-repeat;
   }
-  
-  
   /* contenedores y formas */
   .container {
     max-width: 900px;
@@ -195,20 +193,21 @@
   }
   </style>
   
-  
-  
   <script>
-  
   import AgregarConvocatoriaAPI from '../services/AgregarConvocatoriaAPI.js';
-  import AppNavbar from  '../components/AppNavbar.vue';
+  import AppNavbar from '../components/AppNavbar.vue';
   
   export default {
-    components:{
+    components: {
       AppNavbar,
     },
     mixins: [AgregarConvocatoriaAPI],
-  };   
-  
-  
-  
+    methods: {
+      cancelar() {
+        // Navega a la vista anterior en el historial de navegación
+        this.$router.go(-1);
+      }
+    }
+  };
   </script>
+  

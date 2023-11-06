@@ -13,7 +13,7 @@
             <h1>REGISTRO DE CONVOCATORIAS</h1>
             <h2>Convocatorias publicadas:</h2>
           </div>
-          <button class="add-button">AÑADIR</button>
+          <button class="add-button" @click="addConvocatoria">AÑADIR</button>
         </div>
         <div class="internship-container">
           <div class="internship-list">
@@ -225,17 +225,29 @@
 
 
 <script>
-  
+// Importar useRouter desde vue-router
+import { useRouter } from 'vue-router';
+import AppNavbar from '../components/AppNavbar.vue';
 import RegistroConvocatoriaAPI from '../services/RegistroConvocatoriaAPI.js';
-import AppNavbar from  '../components/AppNavbar.vue';
 
 export default {
-  components:{
+  components: {
     AppNavbar,
   },
   mixins: [RegistroConvocatoriaAPI],
-};   
-
-
-
+  setup() {
+    // Obtener la instancia del router
+    const router = useRouter();
+    
+    // Método para redirigir al componente de agregar convocatoria
+    const addConvocatoria = () => {
+      router.push({ name: 'convocatoria' });
+    };
+    
+    // Exponer el método al template
+    return {
+      addConvocatoria,
+    };
+  },
+};
 </script>

@@ -7,7 +7,7 @@
                     <input class="slide-open" type="radio" id="slide-1" 
                           name="slide" aria-hidden="true" hidden="" checked="checked">
                     <div class="slide-item">
-                        <img src="https://www.ucb.edu.bo/wp-content/uploads/2023/06/UCB-MUNDO2023.jpg">
+                        <img src="../assets/wallpaper2.png">
                     </div>
                     <input class="slide-open" type="radio" id="slide-2" 
                           name="slide" aria-hidden="true" hidden="">
@@ -17,7 +17,7 @@
                     <input class="slide-open" type="radio" id="slide-3" 
                           name="slide" aria-hidden="true" hidden="">
                     <div class="slide-item">
-                        <img src="https://visitworld.today/media/blog/previews/LmwUcjsO8NreM5VBQYifywq1kGJYMXrupH4rjo1n.jpg">
+                        <img src="https://lpz.ucb.edu.bo/wp-content/uploads/2022/10/UCB-Redes-Sociales-Banner-1500x420-1.jpg">
                     </div>
                     <label for="slide-3" class="slide-control prev control-1">‹</label>
                     <label for="slide-2" class="slide-control next control-1">›</label>
@@ -40,8 +40,9 @@
             </div>
         </section>
 
-    <ul>    
-    <li class="card">
+    <ul>  
+        
+    <li class="card" >
         <a 
             href="#" 
             class="featured-image" 
@@ -52,7 +53,7 @@
                 <a href="#">
                     <span class="pre-heading">INTERNSHIP UCB</span>
                     <div class="title">
-                        <h1>Aprende a través de la experiencia! Elige una de nuestra amplia variedad de pasantias basadas en el trabajo, servicio comunitario y colaboraciones de investigacion practica que te ayudaran a aplicar tus conocimientos y adquirir habilidades que te destacaran. </h1>
+                        <h2>Aprende a través de la experiencia! Elige una de nuestra amplia variedad de pasantias basadas en el trabajo, servicio comunitario y colaboraciones de investigacion practica que te ayudaran a aplicar tus conocimientos y adquirir habilidades que te destacaran. </h2>
                     </div>
                 </a>
             </header>
@@ -116,7 +117,7 @@ body {
                 text-align: center;
             }
             section{
-                background-image: url('https://www.culmia.com/blog/wp-content/uploads/2022/04/Libros-de-decoracion-13.jpg');
+                background-image: url('../assets/fondo2.png');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover; 
@@ -144,7 +145,11 @@ body {
                 flex-wrap: wrap;
             }
             h1{
-                color: #fff;
+                color: #100f0f;
+            }
+            h2{
+                color: #201f1f;
+                font-size: 22px;
             }
     @import url(https://fonts.googleapis.com/css?family=Raleway:400,600,700,800);
     @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
@@ -240,30 +245,33 @@ body {
     }
     figure.snip1208:hover button,
     figure.snip1208.hover button {
-      background-color: #117964;
+      background-color: #b8a547;
     }
     
      footer {
                 background-color: #4c64b4;
                 color: #fff;
             } 
-    .card {
-      box-shadow: 0 0px 1px rgba(0, 0, 0, 0.10), 0 2px 2px rgba(0, 0, 0, 0.10);
-      background: #7a787886;
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-    }
+
+  .card {
+  box-shadow: 0 0px 1px rgba(0, 0, 0, 0.10), 0 2px 2px rgba(0, 0, 0, 0.10);
+  background: #4c64b4;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
     
     .card-body {
       display: flex;
       flex-flow: row wrap;
-      padding: 30px;
+      padding: 20px;
       border-radius: 20px;
     }
     
     header {
       flex: 100%;
+      
     }
     
     .featured-image {
@@ -277,12 +285,11 @@ body {
       height: 300px; /* only for mobile, vertical cards: flex-direction: column; */
     }
     
-    /* Horizontal kicks in */
     @media only screen and (min-width: 768px) {
       .card {
         flex-direction: row;
         border-radius: 20px;
-        max-height: 279px; /* desktop horizontal cards with featured image */
+        max-height: 279px; 
       }
     
       .card h3 {
@@ -319,8 +326,8 @@ body {
     }
     
     .pre-heading {
-      color: #444;
-      font-size: 20px;
+      color: #101010;
+      font-size: 25px;
       font-weight: 400;
       text-transform: uppercase;
     }
@@ -332,6 +339,7 @@ body {
       max-width: 1160px;
       padding: 30px;
     }
+    
     
     a {
       text-decoration: none;
