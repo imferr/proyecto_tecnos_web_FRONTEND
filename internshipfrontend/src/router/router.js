@@ -9,6 +9,7 @@ import ListaEvaluacionPasantiaComponent from '../components/ListaEvaluacionPasan
 import InicioBolsaTrabajoComponent from '../components/InicioBolsaTrabajoComponent.vue';
 import ListaRecepcionSolicitudesComponent from '../components/ListaRecepcionSolicitudesComponent.vue';
 
+
 const routes = [
     { path : '/', component: LoginStudentComponent, name: 'registro' },
     { path : '/home', component: HomePageComponent, name: 'home' },
