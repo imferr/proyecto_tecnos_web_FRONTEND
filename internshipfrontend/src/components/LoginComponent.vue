@@ -1,6 +1,7 @@
 <template>
   <div>
     <AppNavbar />
+  </div>
      <div id="app">
   <div class="login-container">
     <div class="login-box">
@@ -26,6 +27,7 @@
       />
       <div class="button-container">
     <button @click="login">Iniciar Sesión</button> 
+
     <button @click="adminLogin">Iniciar Sesión Administrador</button>
   </div>
 
@@ -33,15 +35,14 @@
     </div>
   </div>
   </div>
-</div>
 </template>
 
 <script>
-import AppNavbar from '../components/AppNavbar.vue'; // Importa el componente Navbar
-import LoginAPI from '../services/LoginAPI.js'; // Asegúrate de importar LoginStudentAPI
+import AppNavbar from '../components/AppNavbar.vue'; 
+import LoginAPI from '../services/LoginAPI.js'; 
 export default {
   components: {
-    AppNavbar, // Registra el componente Navbar para usarlo en la plantilla
+    AppNavbar, 
   },
   
   mixins: [LoginAPI],
@@ -58,21 +59,16 @@ export default {
     clearError() {
       this.error = '';
     },
-    // Otros métodos de inicio de sesión
+    login() {
+    this.$router.push('/registro-admin');
+  },
   },
 };
 </script>
-<style>
-body {
-  background-image: url('@/assets/background.jpg');
-  background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  background-attachment: fixed; /* Fija la imagen en su lugar */
-}
-</style>
+
 <style scoped>
 .login-container {
-  font-family: 'Arial', sans-serif; /* Cambia 'Arial' por la fuente que desees usar */
+  font-family: 'Arial', sans-serif; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +83,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 40px;
   background-color: #f9f9f9;
-  background-color: rgba(255, 255, 255, 0.85); /* Establece la opacidad aquí */
+  background-color: rgba(255, 255, 255, 0.85); 
   max-width: 400px;
   width: 100%;
 }
@@ -119,7 +115,7 @@ button {
   width: 40%;
   padding: 3px;
   margin-top: 10px;
-  background-color: #007bff;
+  background-color: #4c64b4;
   color: #fff;
   border: none;
   border-radius: 20px;
@@ -133,8 +129,16 @@ button {
 
 .button-container {
   display: flex;
-  justify-content: space-evenly; /* Coloca los botones al principio y al final del contenedor con espacio entre ellos */
-  margin-top: 10px; /* Espacio superior entre el contenido y los botones */
+  justify-content: space-evenly; 
+  margin-top: 10px; 
+}
+</style>
+<style>
+body {
+  background-image: url('@/assets/background.jpg');
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
 }
 </style>
 

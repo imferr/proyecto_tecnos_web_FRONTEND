@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <AppNavbar />
    <div id="app">
+    <app-navbar></app-navbar> 
   <div class="registro-admin">
     <div class="registro-box">
       <img src="@/assets/logoU.png" alt="Logo" class="logo" />
@@ -75,15 +74,15 @@
       <button @click="registrar" class="btn-registrar">Registrarse</button>    </div>
   </div>
    </div>
-  </div>
+  
 </template>
-
+                  
 <script>
-import AppNavbar from '../components/AppNavbar.vue'; // Importa el componente Navbar
-import RegistroAdminAPI from '../services/RegistroAdminAPI.js'; // Asegúrate de importar LoginStudentAPI
+import AppNavbar from '../components/AppNavbar.vue'; 
+import RegistroAdminAPI from '../services/RegistroAdminAPI.js'; 
 export default {
   components: {
-    AppNavbar, // Registra el componente Navbar para usarlo en la plantilla
+    AppNavbar, 
   },
   mixins: [RegistroAdminAPI],
 
@@ -98,12 +97,12 @@ export default {
       nacimiento: '',
       direccion: '',
       cargo: '',
-      empresa: 'empresa1', // Valor predeterminado
+      empresa: 'empresa1', 
     };
   },
   methods: {
     registrar() {
-      // Agregar lógica de registro aquí
+     
     },
   },
 };
@@ -111,20 +110,21 @@ export default {
 <style>
 body {
   background-image: url('@/assets/background.jpg');
-  background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  background-attachment: fixed; /* Fija la imagen en su lugar */
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
 }
 </style>
 
 
-<style scoped>
+<style>
 .registro-admin {
+    padding-top: 70px; 
   font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 120vh;
 }
 
 .registro-box {
@@ -135,11 +135,10 @@ body {
   border-radius: 40px;
   background-color: #f9f9f9;
   background-color: rgba(255, 255, 255, 0.85);
-  max-width: 800px; /* Ajustar el ancho a tus necesidades */
+  max-width: 800px;
   width: 100%;
-  height: 82vh; /* Ajustar la altura según tus necesidades */
+  height: 110vh;
 }
-
 .logo {
   display: block;
   margin: 0 auto;
@@ -167,12 +166,12 @@ select {
   width: 25%;
   padding: 5px;
   margin-top: 10px;
-  background-color: #007bff;
+  background-color: #4c64b4;
   color: #fff;
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  margin-right: -30pc; /* Ajusta la cantidad de margen a tu preferencia */
+  margin-right: -30pc; 
 }
 
 .form-group {
