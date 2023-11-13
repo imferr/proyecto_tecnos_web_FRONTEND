@@ -23,10 +23,10 @@
             <router-link class="nav-link" to="/mainBolsaTrabajo">Bolsa Trabajo</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/eventos">Convenios-Pasantias</router-link>
+            <router-link class="nav-link" to="/">Convenios-Pasantias</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Promociones</router-link>
+            <router-link class="nav-link" to="/eventos">Promociones</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/solicitudPasantia">Contacto</router-link>
