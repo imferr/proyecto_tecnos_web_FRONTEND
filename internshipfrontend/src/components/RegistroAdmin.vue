@@ -3,7 +3,7 @@
     <app-navbar></app-navbar> 
   <div class="registro-admin">
     <div class="registro-box">
-      <img src="@/assets/logoU.png" alt="Logo" class="logo" />
+      <img src="@/assets/logo_Universidad.png" alt="Logo" class="logo" />
       <h2>REGISTRARSE</h2>
       <p>ADMINISTRADOR DE UNA EMPRESA</p>
 

@@ -28,25 +28,26 @@
   </template>
   
   <style>
-  .componentListaRecepcionSolicitudes{
-    display: flex;
-    height: 100vh;
-    justify-content: center; 
-    align-items: center; 
-    padding: 10px;
-    background-image: url('../assets/fondo_principal.jpeg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-  }
-  .gray-container {
-  width: 60%; 
-  background-color: rgba(234, 229, 229, 0.621); 
+  .componentListaRecepcionSolicitudes {
+  display: flex;
+  height: 80%; /* Cambia el valor de 80% o el que desees */
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-image: url('../assets/fondo_principal.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.gray-container {
+  width: 60%;
+  background-color: rgba(234, 229, 229, 0.621);
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 20px; 
-  }
+  margin-top: 20px; /* Ajusta este valor según sea necesario */
+}
   .gray-container > div > h2 {
   margin-bottom: 10px; 
   }
@@ -63,7 +64,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 0;
   }
   
   table thead {
@@ -79,20 +80,6 @@
   
   table tbody tr:nth-child(even) {
     background-color: #f2f2f2;
-  }
-  
-  button {
-    padding: 5px 10px;
-    background-color: #4c64b4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #3a4c8a;
   }
   </style>
   

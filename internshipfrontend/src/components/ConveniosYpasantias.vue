@@ -25,7 +25,7 @@
           <div class="card-body">
             <div class="title-row">
               <h2 class="card-title">PASANTÍAS</h2>
-              <button class="btn add-btn">AÑADIR</button>
+              <button class="btn add-btn" @click="formSolicitudPasantia">AÑADIR</button>
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <button class="btn view-btn"
@@ -52,6 +52,9 @@
     
     verConvenios() {
     this.$router.push('/Convenios');
+  },
+  formSolicitudPasantia() {
+    this.$router.push('/solicitudPasantia');
   },
   },
 };

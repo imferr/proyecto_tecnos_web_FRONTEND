@@ -5,7 +5,7 @@
      <div id="app">
   <div class="login-container">
     <div class="login-box">
-      <img src="@/assets/logoU.png" alt="Logo" class="logo" />
+      <img src="@/assets/logo_Universidad.png" alt="Logo" class="logo" />
       <h2>INICIO DE SESIÓN</h2>
 
       <label for="email">Correo:</label>

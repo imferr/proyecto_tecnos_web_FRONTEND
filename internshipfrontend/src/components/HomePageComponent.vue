@@ -127,11 +127,6 @@ body {
     width: 100%;
   }
   
-  .carousel-slide {
-    min-width: 100%;
-    transition: transform 0.5s ease-in-out;
-  }
-  
   img {
     width: 100%;
     height: auto;

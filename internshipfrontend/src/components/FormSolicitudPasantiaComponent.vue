@@ -102,22 +102,23 @@
 
 .componentFormSolicitudPasantia{
   display: flex;
-  height: 100vh;
-  justify-content: center; 
-  align-items: center; 
+  height: 80%; /* Cambia el valor de 80% o el que desees */
+  justify-content: center;
+  align-items: center;
   padding: 10px;
-  background-image: url('../assets/fondo_principal.jpeg'); 
-  background-size: cover; 
-  background-position: center; 
+  background-image: url('../assets/fondo_principal.jpeg');
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
-.container {
-  max-width: 900px;
-  width: 100%;
-  background:#ffffff;
-  padding: 25px 30px;
-  border-radius: 20px;
+.gray-container {
+  width: 60%;
+  background-color: rgba(234, 229, 229, 0.621);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px; /* Ajusta este valor según sea necesario */
 }
 
 .container form .user__details {
