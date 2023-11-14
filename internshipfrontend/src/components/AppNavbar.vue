@@ -1,23 +1,20 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-dark">
-    <!-- Brand/logo -->   
     <a class="navbar-brand" href="/">
       <img src="../assets/logo_internship.png">
     </a>
 
-    <!-- Toggler/collapsible Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapsible">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="nav-collapsible">
       <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <router-link class="nav-link" to="/home">Inicio</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Perfil</router-link>
+            <router-link class="nav-link" to="/Informacion-Perfil">Perfil</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/mainBolsaTrabajo">Bolsa Trabajo</router-link>
@@ -29,7 +26,7 @@
             <router-link class="nav-link" to="/eventos">Promociones</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/solicitudPasantia">Contacto</router-link>
+            <router-link class="nav-link" to="/Mensajeria">Contacto</router-link>
           </li>
         </ul>
       </div>
@@ -45,7 +42,6 @@ export default {
   },
   methods: {
     addScripts() {
-      // Crea una promesa que cargará un script
       const loadScript = (src) => new Promise((resolve, reject) => {
         let script = document.createElement('script');
         script.src = src;
@@ -54,7 +50,6 @@ export default {
         document.head.appendChild(script);
       });
 
-      // Carga cada script en secuencia
       loadScript('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
         .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js'))
         .then(() => loadScript('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'))
@@ -89,32 +84,32 @@ export default {
   list-style: none;
   display: flex;
   padding: 10px;
-  justify-content: flex-end; /* Alínea los elementos a la derecha */
+  justify-content: flex-end; 
 }
 
 .navbar-collapse {
-  flex-grow: 1; /* Asegura que el contenedor ocupe todo el espacio disponible */
+  flex-grow: 1; 
 }
   .navbar li.nav-item {
     cursor: pointer;
     transition: color 0.3s;
-    position: relative; /* Posición relativa para los pseudoelementos */
+    position: relative; 
     margin-right: 35px;
   }
 
   .navbar li.nav-item:last-child {
-  margin-right: 0; /* Elimina el margen adicional en el último elemento para evitar un espaciado extra al final */
+  margin-right: 0;
 }
   
-  .navbar li.nav-item a.nav-link { /* Asegurándonos de que afecte a los enlaces dentro de li */
-    color: #ffffff; /* Color del texto para los enlaces */
+  .navbar li.nav-item a.nav-link { 
+    color: #ffffff; 
     font-weight: 400;
-    transition: color 0.3s; /* Transición suave para el color */
-    text-decoration: none; /* Remover el subrayado de los enlaces */
+    transition: color 0.3s;
+        text-decoration: none; 
   }
   
   .navbar li.nav-item:hover a.nav-link {
-    color: #d8d8e6; /* Color al pasar el mouse */
+    color: #d8d8e6; 
   }
   
   .navbar li.nav-item a.nav-link::before {
@@ -122,16 +117,16 @@ export default {
     position: absolute;
     width: 0%;
     height: 2px;
-    bottom: -5px; /* Ajustar según el padding de tu navbar */
+    bottom: -5px; 
     left: 0;
-    background-color: #f8b739; /* Color del subrayado animado */
+    background-color: #f8b739;
     transition: width 0.3s;
-    visibility: hidden; /* Ocultar hasta que se haga hover */
+    visibility: hidden; 
   }
   
   .navbar li.nav-item a.nav-link:hover::before {
-    width: 100%; /* Ancho completo al hacer hover */
-    visibility: visible; /* Mostrar la animación al hacer hover */
+    width: 100%; 
+    visibility: visible; 
   }
   
   .navbar .navbar-brand {
@@ -139,4 +134,3 @@ export default {
     font-weight: bold;
   }
   </style>
-  
