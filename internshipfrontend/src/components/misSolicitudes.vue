@@ -4,8 +4,7 @@
       <div class="espacio"></div>
       <div class="header">
         <h1>MIS SOLICITUDES</h1>
-      </div>
-  
+    
       <div class="table-container">
         <table class="solicitudes-table">
           <thead>
@@ -34,6 +33,7 @@
         </table>
       </div>
     </div>
+  </div>
   </template>
   
   
@@ -59,67 +59,66 @@
   </script>
   
   <style scoped>
- .espacio{
+  .espacio {
     margin-top: 9%;
-  
   }
-
-.header {
+  
+  .header {
     font-family: 'Arial', sans-serif;
-  background-color: #eff2f5bb;
-  border-radius: 25px;
-  text-align: center;
-  color: #333;
-  margin: 20px;
-  padding-top: 60px; 
-  padding-bottom: 400px; 
-  position: relative;
-  z-index: 1;
-}
-
-.table-container {
+    background-color: #eff2f5bb;
+    border-radius: 25px;
+    text-align: center;
+    color: #333;
+    margin: 20px;
+    padding-top: 60px;
+    padding-bottom: 20px; /* Reducido para evitar excesivo espacio */
+    position: relative;
+    z-index: 1;
+  }
+  
+  .table-container {
     font-family: 'Arial', sans-serif;
-
-  background-color: white;
-  border-radius: 8px;
-  padding: 20px;
-  position:fixed;
-  top: 180px; 
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  z-index: 2;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-
-.solicitudes-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.solicitudes-table th, .solicitudes-table td {
-  text-align: left;
-  padding: 8px;
-  border-bottom: 10px;
-}
-
-.solicitudes-table th {
-  background-color: #f2f2f2;
-}
-
-.estado {
-  border-radius: 15px;
-  padding: 5px 10px;
-  color: white;
-  font-weight: bold;
-}
-
-.aceptado {
-  background-color: #4CAF50;
-}
-
-.rechazado {
-  background-color: #F44336;
-}
-</style>
+    overflow-x: auto; /* Para scroll horizontal si es necesario */
+    overflow-y: auto; /* Para scroll vertical si es necesario */
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative; /* Cambiado de fixed a relative */
+    margin: 0 auto; /* Centrado automático */
+    width: 90%; /* Ancho ajustado al contenedor padre */
+    max-width: 1200px; /* Máximo ancho para grandes pantallas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .solicitudes-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+  }
+  
+  .solicitudes-table th, .solicitudes-table td {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .solicitudes-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .estado {
+    border-radius: 15px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .aceptado {
+    background-color: #4CAF50;
+  }
+  
+  .rechazado {
+    background-color: #F44336;
+  }
+  </style>
+  
