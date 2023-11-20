@@ -1,77 +1,41 @@
 <template>
-  <div>
-    <AppNavbar/>
-  <div class="componentRegistroStudent">
-  <div class="container">
-    <div class="title">
-      <img src="../assets/logo_Universidad.png" alt="Logo" class="logo">REGISTRARSE
-    </div>
-    <form action="#">
-      <div class="user__details">
-        <div class="input__box">
-          <span class="details">Nombres:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Apellidos:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Correo institucional: </span>
-          <input type="email" placeholder="nombre.apellido@ucb.edu.bo" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Número de teléfono</span>
-          <input type="tel" pattern="" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Dirección:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Carrera:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Semestre:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Carnet de identidad</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Fecha de nacimiento:</span>
-          <input type="date" placeholder="dd/mm/aaaa" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Género:</span>
-          <div class="gender__details">
-            <input type="radio" name="gender" id="dot-1">
-            <input type="radio" name="gender" id="dot-2">
-            <div class="category">
-              <label for="dot-1">
-                <span class="dot one"></span>
-                <span>Mujer</span>
-              </label>
-              <label for="dot-2">
-                <span class="dot two"></span>
-                <span>Hombre</span>
-              </label>
-            </div>
+    <div>
+      <AppNavbar/>
+      <div class="componentAgregarEventos">
+        <div class="gray-container">
+          <div class="title">
+            <h2>Añadir eventos</h2>  
           </div>
+        <div class="container">
+          <form action="#">
+            <div class="user__details">
+              <div class="input__box">
+                <span class="details">Tipo evento:</span>
+                <input type="text" placeholder="" required>
+              </div>
+              <div class="input__box">
+                <span class="details">Fecha inicio:</span>
+                <input type="date" placeholder="" required>
+              </div>
+              <div class="input__box">
+                <span class="details">Hora:</span>
+                <input type="time" placeholder="" required>
+              </div>
+              <div class="input__box description">
+                <span class="details">Descripción:</span>
+                <textarea placeholder="Descripción del evento..."></textarea>
+              </div>
+            </div>
+            <div class="button">
+              <button type="submit" value="AÑADIR" @click="eventos">Añadir</button>
+              <button type="reset" value="CANCELAR" @click="eventos">Cancelar</button>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="button">
-        <button type="submit" value="REGISTRARSE" @click="login">Registrarse </button>
       </div>
-    </form>
     </div>
-  </div>
-</div>
-
-</template>
-
+  </template>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
@@ -95,18 +59,29 @@
   width: auto;  
   margin-right: 10px; 
 }
-.componentRegistroStudent{
+.componentAgregarEventos {
   display: flex;
-  height: 100vh;
-  justify-content: center; /*verticalmente */
-  align-items: center; /* horizontalmente */
+  height: 80%; /* Cambia el valor de 80% o el que desees */
+  justify-content: center;
+  align-items: center;
   padding: 10px;
-  background-image: url('../assets/fondo_principal.jpeg'); 
-  background-size: cover; 
-  background-position: center; 
+  background-image: url('../assets/fondo_principal.jpeg');
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
+.gray-container {
+  width: 60%;
+  background-color: rgba(234, 229, 229, 0.621);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px; /* Ajusta este valor según sea necesario */
+}
+  .gray-container > div > h2 {
+  margin-bottom: 10px; 
+  }
 
 /* contenedores y formas */
 .container {
@@ -154,6 +129,18 @@ form .user__details .input__box {
   font-size: 16px;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
+}
+.user__details .input__box textarea {
+  height: 100px;  /* Ajusta según la altura deseada */
+  width: 100%;
+  outline: none;
+  border-radius: 20px;  /* Esto hará que los bordes sean redondeados */
+  border: 1px solid var(--main-grey);
+  padding: 15px;  /* Añade relleno para que el texto no esté demasiado cerca del borde */
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  resize: vertical;  /* Esto permitirá que el usuario ajuste verticalmente el área de texto si lo necesita */
 }
 
 .user__details .input__box input:focus,
@@ -212,6 +199,7 @@ form .button {
 
 form .button button {
   height: 100%;
+  margin-top: 20px; 
   display: inline-block; 
   padding: 0 25px; 
   outline: none;
@@ -222,6 +210,10 @@ form .button button {
   border-radius: 20px;
   background-color:  #4c64b4 ;
   transition: all 0.3s ease;
+}
+
+form .button button:first-child {
+  margin-right: 10px;
 }
 
 form .button button:hover {
@@ -257,16 +249,16 @@ form .button button:hover {
 
 <script>
 
-import LoginStudentAPI from '../services/LoginStudentAPI.js';
+import AgregarEventosAPI from '../services/AgregarEventosAPI.js';
 import AppNavbar from  '../components/AppNavbar.vue';
 
 export default {
   components:{
     AppNavbar,
   },
-  mixins: [LoginStudentAPI],
+  mixins: [AgregarEventosAPI],
 };   
 
 
 
-</script>
+</script>  
