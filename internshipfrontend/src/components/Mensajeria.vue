@@ -18,34 +18,53 @@
   </template>
 
 <script>
+//import AppNavbar from '../components/AppNavbar.vue';
+//import MensajeriaAPI from '../services/MensajeriaAPI.js';
+import axios from 'axios'; // Asegúrate de haber instalado axios
 import AppNavbar from '../components/AppNavbar.vue';
-import MensajeriaAPI from '../services/MensajeriaAPI.js';
+
+const API_BASE_URL = 'http://localhost:8080/api/v1/mensaje'; // URL de tu API
 
 export default {
+  name: 'MensajeriaChat',
   components: {
     AppNavbar
   },
-  mixins: [MensajeriaAPI],
-  name: 'CardSection',
   data() {
     return {
       newMessage: '',
-      messages: [
-        { content: '¡Hola! ¿Cómo puedo ayudarte hoy?', sender: 'bot' }
-      ]
+      messages: []
     };
   },
+  mounted() {
+    this.loadMessages(); // Cargar mensajes al iniciar
+  },
   methods: {
-    sendMessage() {
+    async loadMessages() {
+      try {
+        const response = await axios.get(API_BASE_URL);
+        this.messages = response.data.messages.map(msg => ({ content: msg.messageContent, sender: 'bot' })); // Ajusta esto según tu lógica
+      } catch (error) {
+        console.error('Error al cargar los mensajes', error);
+      }
+    },
+    async sendMessage() {
       if (this.newMessage.trim() !== '') {
-        // Añadir el mensaje del usuario
-        this.addMessage(this.newMessage, 'user');
-        
-        // Simular una respuesta del bot
-        this.botResponse(this.newMessage);
+        this.addMessage(this.newMessage, 'user'); // Añade el mensaje a la UI
 
-        // Limpiar el input después de enviar
-        this.newMessage = '';
+        try {
+          // Enviar el mensaje a la API
+          await axios.post(`${API_BASE_URL}/new`, {
+            messageContent: this.newMessage,
+            sendDate: new Date().toISOString().split('T')[0], // Fecha actual en formato YYYY-MM-DD
+            userIdSender: 1, // Ajusta según tu lógica
+            userIdReceiver: 2 // Ajusta según tu lógica
+          });
+          this.newMessage = ''; // Limpiar el input
+          this.loadMessages(); // Recargar mensajes
+        } catch (error) {
+          console.error('Error al enviar el mensaje', error);
+        }
       }
     },
     addMessage(content, sender) {
@@ -95,15 +114,17 @@ export default {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
-  flex-direction: column;
-  gap: 30px; 
+    flex-direction: column;
+    gap: 20px; 
+    align-items: flex-start;
+  
   }
   
   .message {
     margin-bottom: 12px;
     padding: 10px;
     border-radius: 25px;
-    display: inline-block;
+    display: block;
     max-width: 100%;
     background: #f9f9f9;
   }
