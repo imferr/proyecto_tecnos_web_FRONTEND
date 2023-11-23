@@ -20,11 +20,10 @@
 <script>
 //import AppNavbar from '../components/AppNavbar.vue';
 //import MensajeriaAPI from '../services/MensajeriaAPI.js';
-import axios from 'axios'; // Asegúrate de haber instalado axios
+import axios from 'axios'; 
 import AppNavbar from '../components/AppNavbar.vue';
 
-const API_BASE_URL = 'http://localhost:8080/api/v1/mensaje'; // URL de tu API
-
+const API_BASE_URL = 'http://localhost:8080/api/v1/mensaje';
 export default {
   name: 'MensajeriaChat',
   components: {
@@ -37,7 +36,7 @@ export default {
     };
   },
   mounted() {
-    this.loadMessages(); // Cargar mensajes al iniciar
+    this.loadMessages(); 
   },
   methods: {
     async loadMessages() {
@@ -50,18 +49,17 @@ export default {
     },
     async sendMessage() {
       if (this.newMessage.trim() !== '') {
-        this.addMessage(this.newMessage, 'user'); // Añade el mensaje a la UI
-
+        this.addMessage(this.newMessage, 'user'); 
         try {
           // Enviar el mensaje a la API
           await axios.post(`${API_BASE_URL}/new`, {
             messageContent: this.newMessage,
-            sendDate: new Date().toISOString().split('T')[0], // Fecha actual en formato YYYY-MM-DD
-            userIdSender: 1, // Ajusta según tu lógica
-            userIdReceiver: 2 // Ajusta según tu lógica
+            sendDate: new Date().toISOString().split('T')[0], 
+            userIdSender: 1, 
+            userIdReceiver: 2 
           });
-          this.newMessage = ''; // Limpiar el input
-          this.loadMessages(); // Recargar mensajes
+          this.newMessage = ''; 
+          this.loadMessages();
         } catch (error) {
           console.error('Error al enviar el mensaje', error);
         }
@@ -71,7 +69,6 @@ export default {
       this.messages.push({ content, sender });
     },
     botResponse(userMessage) {
-      // Respuesta simple basada en palabras clave
       let response = '';
 
       if (/hola|saludos|buenas/i.test(userMessage)) {
