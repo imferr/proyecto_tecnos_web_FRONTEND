@@ -1,78 +1,142 @@
 <template>
   <div>
     <AppNavbar/>
-  <div class="componentRegistroStudent">
-  <div class="container">
-    <div class="title">
-      <img src="../assets/logo_Universidad.png" alt="Logo" class="logo">REGISTRARSE
-    </div>
-    <form action="#">
-      <div class="user__details">
-        <div class="input__box">
-          <span class="details">Nombres:</span>
-          <input type="text" placeholder="" required>
+    <div class="componentRegistroStudent">
+      <div class="container">
+        <div class="title">
+          <img src="../assets/logo_Universidad.png" alt="Logo" class="logo">REGISTRARSE
         </div>
-        <div class="input__box">
-          <span class="details">Apellidos:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Correo institucional: </span>
-          <input type="email" placeholder="nombre.apellido@ucb.edu.bo" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Número de teléfono</span>
-          <input type="tel" pattern="" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Dirección:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Carrera:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Semestre:</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Carnet de identidad</span>
-          <input type="text" placeholder="" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Fecha de nacimiento:</span>
-          <input type="date" placeholder="dd/mm/aaaa" required>
-        </div>
-        <div class="input__box">
-          <span class="details">Género:</span>
-          <div class="gender__details">
-            <input type="radio" name="gender" id="dot-1">
-            <input type="radio" name="gender" id="dot-2">
-            <div class="category">
-              <label for="dot-1">
-                <span class="dot one"></span>
-                <span>Mujer</span>
-              </label>
-              <label for="dot-2">
-                <span class="dot two"></span>
-                <span>Hombre</span>
-              </label>
+        <form @submit.prevent="registrar">
+          <div class="user__details">
+            <div class="input__box">
+              <label for="nombres" class="details">Nombres:</label>
+              <input id="nombres" type="text" v-model="nombre" placeholder="" required>
+            </div>
+            <div class="input__box">
+              <label for="apellidos" class="details">Apellidos:</label>
+              <input id="apellidos" type="text" v-model="apellido" placeholder="" required>
+            </div>
+            <div class="input__box">
+              <label for="correo" class="details">Correo institucional:</label>
+              <input id="correo" type="email" v-model="email" placeholder="nombre.apellido@ucb.edu.bo" required>
+            </div>
+            <div class="input__box">
+              <label for="contrasena" class="details">Contraseña:</label>
+              <input type="password" id="contrasena" v-model="contrasena" placeholder="Ingresa tu contraseña" required>
+            </div>
+            <div class="input__box">
+              <label for="telefono" class="details">Número de teléfono:</label>
+              <input type="tel" id="telefono" v-model="telefono" pattern="" placeholder="12121212" required>
+            </div>
+            <div class="input__box">
+              <label for="direccion" class="details">Dirección:</label>
+              <input type="text" id="direccion" v-model="direccion" placeholder="" required>
+            </div>
+            <div class="input__box">
+              <label for="carrera" class="details">Carrera:</label>
+              <input type="text" id="carrera" v-model="carrera" placeholder="" required>
+            </div>
+            <div class="input__box">
+              <label for="semestre" class="details">Semestre:</label>
+              <input type="text" id="semestre" v-model="semestre" placeholder="" required>
+            </div>
+            <div class="input__box">
+              <label for="carnet" class="details">Carnet de identidad:</label>
+              <input type="text" id="carnet" v-model="carnet" placeholder="" required>
+            </div>
+            <div class="input__box">
+              <label for="nacimiento" class="details">Fecha de nacimiento:</label>
+              <input type="date" id="nacimiento" v-model="nacimiento" placeholder="dd/mm/aaaa" required>
+            </div>
+            <div class="input__box">
+              <span class="details">Género:</span>
+              <div class="gender__details">
+                <input type="radio" name="gender" id="dot-1" value="Mujer" v-model="genero">
+                <label for="dot-1">
+                  <span class="dot one"></span>
+                  <span>Mujer</span>
+                </label>
+                <input type="radio" name="gender" id="dot-2" value="Hombre" v-model="genero">
+                <label for="dot-2">
+                  <span class="dot two"></span>
+                  <span>Hombre</span>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
+          <div class="button">
+            <button type="submit" value="REGISTRARSE">Registrarse</button>
+          </div>
+        </form>
       </div>
-      <div class="button">
-        <button type="submit" value="REGISTRARSE" @click="login">Registrarse </button>
-      </div>
-    </form>
     </div>
   </div>
-</div>
-
 </template>
 
+<script>
+import axios from 'axios';
+import AppNavbar from '../components/AppNavbar.vue'; 
+import LoginStudentAPI from '../services/LoginStudentAPI.js';
+
+export default {
+ components: {
+   AppNavbar, 
+ },
+ mixins: [LoginStudentAPI],
+
+ data() {
+    return {
+      nombre: '',
+      apellido: '',
+      email: '',
+      contrasena: '',
+      telefono: '',
+      direccion: '',
+      carrera: '',
+      semestre: '',
+      carnet: '',
+      nacimiento: '',
+      genero: '', 
+    };
+  },
+  methods: {
+  async registrar() {
+    try {
+
+      const usuarioData = {
+        name: this.nombre,
+        lastName: this.apellido,
+        email: this.email,
+        password: this.contrasena,
+        phone: this.telefono,
+        address: this.direccion,
+        carnet: this.carnet
+      };
+
+      await axios.post('http://localhost:8080/api/v1/usuario/register', usuarioData);
+
+      const estudianteData = {
+        semester: this.semestre,
+        carrier: this.carrera,
+        userId: 1, 
+        typeUserId: 1   
+      };
+
+      // Enviar los datos a la segunda API
+      await axios.post('http://localhost:8080/api/v1/estudiantes/register', estudianteData);
+
+      console.log('Registro exitoso');
+    } catch (error) {
+      console.error('Error en el registro:', error);
+    }
+  }
+}
+
+};
+ </script>
+
 <style>
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
 * {
@@ -134,17 +198,17 @@
   margin: 20px 0 12px 0;
 }
 /* inside the form user details */
-form .user__details .input__box {
+form .user_details .input_box {
   width: calc(100% / 2 - 20px);
   margin-bottom: 15px;
 }
 
-.user__details .input__box .details {
+.user_details .input_box .details {
   font-weight: 500;
   margin-bottom: 5px;
   display: block;
 }
-.user__details .input__box input {
+.user_details .input_box input {
   height: 40px;
   width: 100%;
   outline: none;
@@ -156,14 +220,14 @@ form .user__details .input__box {
   transition: all 0.3s ease;
 }
 
-.user__details .input__box input:focus,
-.user__details .input__box input:valid {
+.user_details .input_box input:focus,
+.user_details .input_box input:valid {
   border-color: var(--main-purple);
 }
 
 /* detalles para el genero */
 
-form .gender__details .gender__title {
+form .gender_details .gender_title {
   font-size: 20px;
   font-weight: 500;
 }
@@ -233,7 +297,7 @@ form .button button:hover {
     max-width: 100%;
   }
 
-  form .user__details .input__box {
+  form .user_details .input_box {
     margin-bottom: 15px;
     width: 100%;
   }cd
@@ -252,21 +316,3 @@ form .button button:hover {
   }
 }
 </style>
-
-
-
-<script>
-
-import LoginStudentAPI from '../services/LoginStudentAPI.js';
-import AppNavbar from  '../components/AppNavbar.vue';
-
-export default {
-  components:{
-    AppNavbar,
-  },
-  mixins: [LoginStudentAPI],
-};   
-
-
-
-</script>

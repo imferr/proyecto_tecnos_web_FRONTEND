@@ -3,55 +3,54 @@
     <AppNavbar/>
     <div class="componentAgregarConvocatoria">
       <div class="gray-container">
-        <div>
-        <h2>Añadir convocatoria</h2>          
+        <h2>Añadir convocatoria</h2>
+        <div class="container">
+          <form @submit.prevent="submitForm">
+            <div class="user__details">
+              <div class="input__box">
+                <span class="details">Título:</span>
+                <input type="text" v-model="form.titleConvocatoria" required>
+              </div>
+              <div class="input__box">
+                <span class="details">Nombre Institución:</span>
+                <input type="text" v-model="form.nombreInstitucion" placeholder="Institución ABC" required>
+              </div>
+              <div class="input__box">
+                <span class="details">Correo:</span>
+                <input type="email" v-model="form.correo" placeholder="name.lastname.@ucb.edu.bo" required>
+              </div>
+              <div class="input__box">
+                <span class="details">Teléfono:</span>
+                <input type="tel" v-model="form.telefono" required>
+              </div>
+              <div class="input__box">
+                <span class="details">Fecha publicación:</span>
+                <input type="date" v-model="form.dateConvocatoria" required>
+              </div>
+              <div class="input__box">
+                <span class="details">Fecha inicio:</span>
+                <input type="date" v-model="form.fechaInicio" required>
+              </div>
+              <div class="input__box">
+                <span class="details">Fecha límite:</span>
+                <input type="date" v-model="form.fechaLimite" required>
+              </div>
+              <div class="input__box description">
+                <span class="details">Descripción:</span>
+                <textarea v-model="form.descriptionConvocatoria" placeholder="Descripción del intercambio..."></textarea>
+              </div>
+            </div>
+            <div class="button">
+              <button type="submit">Añadir</button>
+              <button type="button" @click="cancelar">Cancelar</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="container">
-        <form action="#">
-          <div class="user__details">
-            <div class="input__box">
-              <span class="details">Título:</span>
-              <input type="text" placeholder="" required>
-            </div>
-            <div class="input__box">
-              <span class="details">Nombre Institución:</span>
-              <input type="text" placeholder="Institución ABC" required>
-            </div>
-            <div class="input__box">
-              <span class="details">Correo:</span>
-              <input type="email" placeholder="name.lastname.@ucb.edu.bo" required>
-            </div>
-            <div class="input__box">
-              <span class="details">Teléfono:</span>
-              <input type="tel" placeholder="" required>
-            </div>
-            <div class="input__box">
-              <span class="details">Fecha publicación:</span>
-              <input type="date" placeholder="" required>
-            </div>
-            <div class="input__box">
-              <span class="details">Fecha inicio:</span>
-              <input type="date" placeholder="" required>
-            </div>
-            <div class="input__box">
-              <span class="details">Fecha límite:</span>
-              <input type="date" placeholder="" required>
-            </div>
-            <div class="input__box description">
-              <span class="details">Descripción:</span>
-              <textarea placeholder="Descripción del intercambio..."></textarea>
-            </div>
-          </div>
-          <div class="button">
-            <button type="submit" value="AÑADIR" @click="eventos">Añadir</button>
-            <button type="reset" value="CANCELAR" @click="cancelar">Cancelar</button>
-          </div>
-        </form>
-      </div>
-    </div>
     </div>
   </div>
 </template>
+
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
@@ -188,19 +187,41 @@ form .button button {
 </style>
 
 <script>
-import AgregarConvocatoriaAPI from '../services/AgregarConvocatoriaAPI.js';
+import axios from 'axios';
 import AppNavbar from '../components/AppNavbar.vue';
 
 export default {
   components: {
     AppNavbar,
   },
-  mixins: [AgregarConvocatoriaAPI],
+  data() {
+    return {
+      form: {
+        titleConvocatoria: '',
+        descriptionConvocatoria: '',
+        dateConvocatoria: '',
+        stateConvocatoria: true,
+        companyId: 1,
+        useiId: 1
+      },
+    };
+  },
   methods: {
+    submitForm() {
+      const API_URL = 'http://localhost:8080/api/v1/convocatoria/register';
+      axios.post(API_URL, this.form)
+        .then(response => {
+          // Manejar la respuesta aquí, como mostrar un mensaje de éxito o redirigir
+          console.log('Convocatoria añadida:', response.data);
+        })
+        .catch(error => {
+          // Manejar errores aquí, como mostrar un mensaje de error
+          console.error('Hubo un error:', error);
+        });
+    },
     cancelar() {
-      // Navega a la vista anterior en el historial de navegación
       this.$router.go(-1);
-    }
-  }
+    },
+  },
 };
 </script>
