@@ -25,8 +25,8 @@
               <input type="password" id="contrasena" v-model="contrasena" placeholder="Ingresa tu contraseña" required>
             </div>
             <div class="input__box">
-              <label for="telefono" class="details">Número de teléfono:</label>
-              <input type="tel" id="telefono" v-model="telefono" pattern="" placeholder="12121212" required>
+              <label for="telefono">Número de Teléfono:</label>
+         <input type="tel" id="telefono" v-model="telefono" />
             </div>
             <div class="input__box">
               <label for="direccion" class="details">Dirección:</label>
