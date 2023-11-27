@@ -183,6 +183,8 @@ export default {
           phone: this.telefono,
           address: this.direccion,
           carnet: this.carnet,
+          birth: this.nacimiento,
+          gender: this.genero
         };
 
         await axios.post(
@@ -213,11 +215,7 @@ export default {
       } catch (error) {
         console.error("Error en el registro:", error);
 
-        Swal.fire({
-          icon: "error",
-          title: "Error en el registro",
-          text: "Hubo un error al registrar al estudiante. Por favor, inténtalo de nuevo.",
-        });
+
       }
     },
   },

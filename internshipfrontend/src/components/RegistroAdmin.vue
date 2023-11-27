@@ -117,6 +117,8 @@ export default {
           phone: this.telefono,
           address: this.direccion,
           carnet: this.carnet,
+          birth: this.nacimiento, 
+          gender: this.genero,
         };
 
         await axios.post(
@@ -254,4 +256,6 @@ h2 {
 p {
   font-size: small;
 }
+
+
 </style>

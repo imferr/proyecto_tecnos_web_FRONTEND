@@ -104,7 +104,7 @@ export default {
   methods: {
     handleFileUpload(event, fileVariable) {
       if (event.target.files.length > 0) {
-        this[fileVariable] = event.target.files[0].name; // Almacena el nombre del archivo
+        this[fileVariable] = event.target.files[0].name; 
       }
     },
 
@@ -126,7 +126,7 @@ export default {
       };
 
       try {
-        // Primero, enviar el formulario principal
+
         await axios.post(API_BASE_URL, formData);
 
         // Registrar cada documento individualmente
@@ -206,7 +206,7 @@ h2 {
   color: #333;
   text-align: center;
   margin-top: 30px;
-  margin-left: 40px;
+  margin-left: 350px;
 }
 
 .form-box {
@@ -249,7 +249,7 @@ select {
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  margin-left: 680px;
+  margin-left: 600px;
 }
 .input-group input:not(:last-child) {
   margin-right: 15px;

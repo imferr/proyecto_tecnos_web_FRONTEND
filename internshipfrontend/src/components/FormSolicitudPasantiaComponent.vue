@@ -11,39 +11,39 @@
           <div class="user__details">
             <div class="input__box">
               <span class="details">Nombres:</span>
-              <input type="text" required>
+              <input type="text" :value="nombres" readonly>
             </div>
             <div class="input__box">
               <span class="details">Apellidos:</span>
-              <input type="text" required>
+              <input type="text" :value="apellidos" readonly>
             </div>
             <div class="input__box">
               <span class="details">Teléfono:</span>
-              <input type="tel" required> 
+              <input type="tel" :value="telefono" readonly>
             </div>
             <div class="input__box">
               <span class="details">Cédula:</span>
-              <input type="text" required>
+              <input type="text" :value="cedula" readonly>
             </div>
             <div class="input__box">
               <span class="details">Dirección:</span>
-              <input type="text" required>
+              <input type="text" :value="direccion" readonly>
             </div>
             <div class="input__box">
               <span class="details">Correo:</span>
-              <input type="email" required> 
+              <input type="email" :value="correo" readonly>
             </div>
             <div class="input__box">
               <span class="details">Fecha nacimiento:</span>
-              <input type="text" required> 
+              <input type="text" :value="fechaNacimiento" readonly>
             </div>
             <div class="input__box">
               <span class="details">Fecha postulación:</span>
-              <input type="text" required> 
+              <input type="text" :value="fechaPostulacion" readonly>
             </div>
             <div class="input__box">
               <span class="details">Programa postulado:</span>
-              <input type="text" required>
+              <input type="text" :value="programaPostulado" readonly>
             </div>
             <div class="input__box">
               <span class="details">Documentación:</span>
@@ -68,9 +68,60 @@
     </div>
   </div>
   </div>
-  </template>
+</template>
 
-  
+<script>
+import FormSolicitudPasantiaAPI from '../services/FormSolicitudPasantiaAPI.js';
+import AppNavbar from  '../components/AppNavbar.vue';
+import axios from 'axios';
+
+export default {
+  components: {
+    AppNavbar,
+  },
+  mixins: [FormSolicitudPasantiaAPI],
+  data() {
+    return {
+      nombres: '',
+      apellidos: '',
+      telefono: '',
+      cedula: '',
+      direccion: '',
+      correo: '',
+      fechaNacimiento: '',
+      fechaPostulacion: '',
+      programaPostulado: '',
+    };
+  },
+  methods: {
+    obtenerFormularioPorId(id) {
+      axios.get(`http://localhost:8080/api/v1/formulario-solicitud/${id}`)
+         .then(response => {
+          const formulario = response.data.formularioSolicitud;
+          this.nombres = formulario.studentId.userId.name;
+          this.apellidos = formulario.studentId.userId.lastName;
+          this.telefono = formulario.studentId.userId.phone;
+          this.cedula = formulario.studentId.userId.idCard;
+          this.direccion = formulario.studentId.userId.address;
+          this.correo = formulario.studentId.userId.email;
+          this.fechaNacimiento = formulario.studentId.userId.birthDate;
+          this.fechaPostulacion = formulario.postulationDate;
+          this.programaPostulado = formulario.postulatedProgram;
+         })
+         .catch(error => {
+           console.error('Error al obtener el formulario por ID', error);
+         });
+    },
+  },
+  created() {
+    // Llama a la función para obtener el formulario por ID cuando el componente se crea
+    this.obtenerFormularioPorId(1); // Cambia el ID según sea necesario
+  },
+};
+</script>
+
+
+
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
@@ -249,14 +300,3 @@ form .button button:hover {
 }
 </style>
 
-<script>
-import FormSolicitudPasantiaAPI from '../services/FormSolicitudPasantiaAPI.js';
-import AppNavbar from  '../components/AppNavbar.vue';
-
-export default {
-  components:{
-    AppNavbar,
-  },
-  mixins: [FormSolicitudPasantiaAPI],
-};   
-</script>  
