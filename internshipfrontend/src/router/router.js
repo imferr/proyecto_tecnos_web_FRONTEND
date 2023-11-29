@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 //Rosa
 import HomePageComponent from '../components/HomePageComponent.vue';
+import RegistroUsuarioComponent from '../components/RegistroUsuarioComponent.vue';
 import LoginStudentComponent from '../components/LoginStudentComponent.vue';
 import AgregarConvocatoriaComponent from '../components/AgregarConvocatoriaComponent.vue';
 import AgregarEventosComponent from '../components/AgregarEventosComponent.vue';
@@ -28,6 +29,7 @@ import Mensajeria from '../components/Mensajeria.vue';
 const routes = [
   //Rosa
   { path : '/formulario', component: LoginStudentComponent, name: 'registro' },
+  { path : '/registroUsuario', component: RegistroUsuarioComponent, name: 'registroUsuario' },
   { path : '/home', component: HomePageComponent, name: 'home' },
   { path : '/convocatoria', component: AgregarConvocatoriaComponent, name: 'convocatoria' },
   { path : '/eventos', component: AgregarEventosComponent, name: 'eventos' },
