@@ -34,9 +34,30 @@
                 <input type="text" placeholder="" required>
               </div>
               <div class="input__box">
+              <span class="details">Fecha de nacimiento:</span>
+              <input type="date" placeholder="dd/mm/aaaa" required>
+              </div>
+              <div class="input__box">
                 <span class="details">Contraseña:</span>
                 <input type="password" placeholder="" required>
               </div>
+              <div class="input__box">
+              <span class="details">Género:</span>
+              <div class="gender__details">
+              <input type="radio" name="gender" id="dot-1">
+              <input type="radio" name="gender" id="dot-2">
+              <div class="category">
+              <label for="dot-1">
+                <span class="dot one"></span>
+                <span>Mujer</span>
+              </label>
+              <label for="dot-2">
+                <span class="dot two"></span>
+                <span>Hombre</span>
+              </label>
+            </div>
+            </div>
+          </div>
             </div>
             <div class="button">
               <button type="submit" value="AÑADIR" @click="registro">Registrar</button>
@@ -165,6 +186,40 @@
     background: var(--main-yellow); 
     align-items: center;
   }
+
+  form .gender__details .gender__title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+form .gender__details .category {
+  display: flex;
+  width: 15%;
+  margin: 15px 0;
+  justify-content: space-between;
+}
+
+.gender__details .category label {
+  display: flex;
+  align-items: center;
+}
+
+.gender__details .category .dot {
+  height: 18px;
+  width: 18px;
+  background: var(--sub-grey);
+  border-radius: 50%;
+  margin: 10px;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+
+#dot-1:checked ~ .category .one,
+#dot-2:checked ~ .category .two,
+#dot-3:checked ~ .category .three {
+  border-color: var(--sub-grey);
+  background: var(--main-black);
+}
   
   /* Responsive */
   @media (max-width: 584px) {
