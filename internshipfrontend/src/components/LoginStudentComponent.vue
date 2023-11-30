@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <app-navbar></app-navbar>
+    <NavBarLogin/>
     <div class="registro-student">
       <div class="registro-box">
         <img src="@/assets/logo_Universidad.png" alt="Logo" class="logo" />
@@ -25,13 +25,13 @@
 
 <script>
 import axios from "axios";
-import AppNavbar from "../components/AppNavbar.vue";
+import NavBarLogin from "../components/NavBarLogin.vue";
 import LoginStudentAPI from "../services/LoginStudentAPI.js";
 import Swal from 'sweetalert2'
 
 export default {
   components: {
-    AppNavbar,
+    NavBarLogin,
   },
   mixins: [LoginStudentAPI],
 

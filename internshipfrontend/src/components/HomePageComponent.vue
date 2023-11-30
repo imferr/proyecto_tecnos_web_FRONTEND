@@ -65,7 +65,7 @@
               <figure class="snip1208">
     <img src="https://infoturlatam.com/wp-content/uploads/2023/08/estudiantes-viajeros1.jpg" alt="sample66"/>
     <figcaption>
-      <h3>Pasantía en bancos</h3>
+      <h3>Pasantía en bancos centrales</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
       </p>
@@ -179,6 +179,10 @@ body {
     padding: 25px;
     position: relative;
   }
+  figure.snip1208 figcaption h3 {
+  text-align: center; /* Alinea el texto al centro */
+  /* Otros estilos que ya tengas, como tamaño de fuente, color, etc. */
+}
   
   figure.snip1208 h3,
   figure.snip1208 p {

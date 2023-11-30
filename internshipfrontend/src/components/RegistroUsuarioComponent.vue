@@ -1,6 +1,6 @@
 <template>
     <div>
-      <AppNavbar/>
+      <NavBarLogin/>
       <div class="componentRegistroUsuario">
         <div class="gray-container">
           <div>
@@ -240,11 +240,11 @@ form .gender__details .category {
   
   <script>
   import RegistroUsuarioAPI from '../services/RegistroUsuarioAPI.js';
-  import AppNavbar from '../components/AppNavbar.vue';
+  import NavBarLogin from '../components/NavBarLogin.vue';
   
   export default {
     components: {
-      AppNavbar,
+      NavBarLogin,
     },
     mixins: [RegistroUsuarioAPI],
     methods: {
