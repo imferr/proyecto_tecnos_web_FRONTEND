@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import AppNavbar from "../components/AppNavbar.vue";
-import axios from "axios";
 import NavBarLogin from "../components/NavBarLogin.vue";
 import LoginStudentAPI from "../services/LoginStudentAPI.js";
 import Swal from 'sweetalert2';
@@ -68,7 +66,6 @@ export default {
   }
 };
 </script>
-
 
 <style>
 body {

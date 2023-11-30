@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <NavBarLogin/>
+    <NavBarLogin />
     <div class="registro-admin">
       <div class="registro-box">
         <img src="@/assets/logo_Universidad.png" alt="Logo" class="logo" />
         <h2>REGISTRARSE</h2>
         <p>ADMINISTRADOR DE UNA EMPRESA</p>
+        <p>Termina de completar los datos para continuar</p>
         <div class="form-group">
           <div class="half-width">
             <label for="cargo">Cargo:</label>
@@ -20,7 +21,6 @@
             </select>
           </div>
         </div>
-
         <button @click="registrar" class="btn-registrar">Registrarse</button>
       </div>
     </div>
@@ -28,48 +28,61 @@
 </template>
 
 <script>
-import AppNavbar from "../components/AppNavbar.vue";
-import axios from "axios";
-import Swal from "sweetalert2";
 import NavBarLogin from "../components/NavBarLogin.vue";
 import RegistroAdminAPI from "../services/RegistroAdminAPI.js";
 import Swal from "sweetalert2";
 
-
 export default {
   components: {
-    NavBarLogin,
+    NavBarLogin
   },
   data() {
     return {
       cargo: "",
-      empresa: "",
+      empresa: ""
     };
   },
   methods: {
     async registrar() {
+      if (this.cargo.trim() === '') {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Por favor, completa el campo de cargo."
+        });
+        return;
+      }
+
+      if (this.empresa.trim() === '') {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Por favor, selecciona una empresa."
+        });
+        return;
+      }
+
       try {
         const adminData = {
           cargo: this.cargo,
           companyId: parseInt(this.empresa),
-          userId: 1, // Deberás obtener este valor según tu lógica de aplicación
-          typeuserId: 1 // Igualmente, ajusta este valor según tu lógica
+          userId: 1,
+          typeuserId: 1
         };
 
-        const response = await RegistroAdminAPI.register(adminData);
-        console.log(response);
+        await RegistroAdminAPI.register(adminData);
         Swal.fire({
-                icon: "success",
-                title: "Registro exitoso",
-                text: "El registro se ha completado con éxito.",
-              });
+          icon: "success",
+          title: "Registro exitoso",
+          text: "El registro se ha completado con éxito."
+        });
       } catch (error) {
         console.error(error);
         Swal.fire({
-              icon: "error",
-              title: "Error en el registro",
-              text: "Hubo un error al registrar al administrador. Por favor, inténtalo de nuevo.",
-            });
+          icon: "error",
+          title: "Error en el registro",
+          text: "Hubo un error al registrar al administrador. Por favor, inténtalo de nuevo."
+        });
       }
     }
   }
@@ -106,6 +119,7 @@ body {
   width: 100%;
   /* Eliminar la altura fija */
 }
+
 .logo {
   display: block;
   margin: 0 auto;
@@ -129,20 +143,16 @@ select {
   border-radius: 20px;
 }
 
-button {
-  width: 40%;
-  padding: 3px;
+.btn-registrar {
+  width: 25%;
+  padding: 5px;
   margin-top: 10px;
-  background-color: #4c64b4; 
+  background-color: #4c64b4;
   color: #fff;
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s; 
-}
-
-button:hover {
-  background-color: #b6a358; 
+  margin-right: -30pc;
 }
 
 .form-group {
@@ -154,6 +164,7 @@ button:hover {
 .half-width {
   width: 48%;
 }
+
 .half-width-first {
   width: 30%;
 }
@@ -174,6 +185,4 @@ h2 {
 p {
   font-size: small;
 }
-
-
 </style>

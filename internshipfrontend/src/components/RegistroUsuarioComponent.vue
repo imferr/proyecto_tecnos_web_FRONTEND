@@ -243,7 +243,6 @@ import RegistroUsuarioAPI from '../services/RegistroUsuarioAPI.js';
 import NavBarLogin from '../components/NavBarLogin.vue';
 import Swal from "sweetalert2";
 
-
 export default {
   components: {
     NavBarLogin,

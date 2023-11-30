@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse" id="nav-collapsible">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <router-link class="nav-link" to="/">Iniciar Sesion</router-link>
+              <router-link class="nav-link" to="/">Iniciar Sesión</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/registroUsuario">Registrarse</router-link>
