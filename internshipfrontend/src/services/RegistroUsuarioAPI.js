@@ -1,37 +1,19 @@
-export default {
-    data() {
-        return {
-            email: '',
-            password: '',
-            error: '',
-        }
-    },
-    methods: {
-        /*SOLO ES UN EJEMPLO, NO ES LA SOLUCION*/
-        /*login() {
-            const student = {
-                email: this.email,
-                password: this.password,
-            };
-            axios.post('http://localhost:3000/api/student/login', student)
-                .then((response) => {
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('student', JSON.stringify(response.data.student));
-                    this.$router.push({ name: 'home' });
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        this.error = error.response.data.message;
-                    } else {
-                        this.error = error.message;
-                    }
-                });
-        },*/
+import axios from 'axios';
 
+const API_BASE_URL = 'http://localhost:8080/api/v1/usuario';
 
-        /*SOLO ES UN EJEMPLO, NO ES LA SOLUCION*/
-        login(){
-            this.$router.push({ name: 'registroUsuario' });
-        }
-    },
-};
+class RegistroUsuarioAPI {
+    async register(userData) {
+        try {
+            const response = await axios.post(`${API_BASE_URL}/register`, userData);
+            console.log("Registro exitoso:", response.data);
+              return response.data;
+        } catch (error) {
+            console.error("Error en el registro:", error);
+            throw error;
+          }
+    }
+
+}
+
+export default new RegistroUsuarioAPI();

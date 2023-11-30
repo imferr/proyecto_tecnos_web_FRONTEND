@@ -28,27 +28,20 @@
 </template>
 
 <script>
+import AppNavbar from "../components/AppNavbar.vue";
 import axios from "axios";
 import Swal from "sweetalert2";
 import NavBarLogin from "../components/NavBarLogin.vue";
 import RegistroAdminAPI from "../services/RegistroAdminAPI.js";
+import Swal from "sweetalert2";
+
 
 export default {
   components: {
     NavBarLogin,
   },
-  mixins: [RegistroAdminAPI],
-
   data() {
     return {
-      nombre: "",
-      apellido: "",
-      email: "",
-      telefono: "",
-      genero: "",
-      carnet: "",
-      nacimiento: "",
-      direccion: "",
       cargo: "",
       empresa: "",
     };
@@ -56,55 +49,30 @@ export default {
   methods: {
     async registrar() {
       try {
-        const usuarioData = {
-          name: this.nombre,
-          lastName: this.apellido,
-          email: this.email,
-          password: this.password,
-          phone: this.telefono,
-          address: this.direccion,
-          carnet: this.carnet,
-          birth: this.nacimiento, 
-          gender: this.genero,
-        };
-
-        await axios.post(
-          "http://localhost:8080/api/v1/usuario/register",
-          usuarioData
-        );
-
-        const companyid = parseInt(this.empresa);
-
         const adminData = {
           cargo: this.cargo,
-          companyId: companyid,
-          userId: 1,
-          typeuserId: 2,
+          companyId: parseInt(this.empresa),
+          userId: 1, // Deberás obtener este valor según tu lógica de aplicación
+          typeuserId: 1 // Igualmente, ajusta este valor según tu lógica
         };
 
-        await axios.post(
-          "http://localhost:8080/api/v1/administradores/register",
-          adminData
-        );
-
+        const response = await RegistroAdminAPI.register(adminData);
+        console.log(response);
         Swal.fire({
-          icon: "success",
-          title: "Registro exitoso",
-          text: "El registro se ha completado con éxito.",
-        });
-
-        console.log("Registro de administrador exitoso");
+                icon: "success",
+                title: "Registro exitoso",
+                text: "El registro se ha completado con éxito.",
+              });
       } catch (error) {
-        console.error("Error en el registro:", error);
-
+        console.error(error);
         Swal.fire({
-          icon: "error",
-          title: "Error en el registro",
-          text: "Hubo un error al registrar al administrador. Por favor, inténtalo de nuevo.",
-        });
+              icon: "error",
+              title: "Error en el registro",
+              text: "Hubo un error al registrar al administrador. Por favor, inténtalo de nuevo.",
+            });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
