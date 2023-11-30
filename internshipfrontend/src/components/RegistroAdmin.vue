@@ -67,7 +67,7 @@ export default {
           cargo: this.cargo,
           companyId: parseInt(this.empresa),
           userId: 1,
-          typeuserId: 1
+          typeuserId: 2
         };
 
         await RegistroAdminAPI.register(adminData);
