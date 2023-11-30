@@ -47,9 +47,14 @@ export default {
         console.error('Error al cargar los mensajes', error);
       }
     },
+    addMessage(content, sender) {
+      this.messages.push({ content, sender });
+    },
     async sendMessage() {
       if (this.newMessage.trim() !== '') {
-        this.addMessage(this.newMessage, 'user'); 
+        this.addMessage(this.newMessage, 'user'); // Agrega el mensaje del usuario al chat
+        this.botResponse(this.newMessage); // Llama a botResponse para generar una respuesta del bot
+
         try {
           // Enviar el mensaje a la API
           await axios.post(`${API_BASE_URL}/new`, {
@@ -58,31 +63,48 @@ export default {
             userIdSender: 1, 
             userIdReceiver: 2 
           });
-          this.newMessage = ''; 
-          this.loadMessages();
+          this.newMessage = ''; // Limpia el campo de nuevo mensaje
+          this.loadMessages(); // Recarga los mensajes
         } catch (error) {
           console.error('Error al enviar el mensaje', error);
         }
       }
     },
-    addMessage(content, sender) {
-      this.messages.push({ content, sender });
-    },
+
     botResponse(userMessage) {
-      let response = '';
+    let response = '';
 
-      if (/hola|saludos|buenas/i.test(userMessage)) {
-        response = '¡Hola! Es un placer saludarte. ¿Qué información necesitas?';
-      } else if (/ayuda|soporte/i.test(userMessage)) {
-        response = 'Claro, dime en qué puedo asistirte.';
-      } else if (/gracias/i.test(userMessage)) {
-        response = '¡De nada! Siempre estoy aquí para ayudarte.';
-      } else {
-        response = 'Lo siento, no entendí tu pregunta. ¿Puedes intentar formularla de otra manera?';
-      }
-
-      setTimeout(() => this.addMessage(response, 'bot'), 1000);
+    if (/Hola|Saludos|Buenas/i.test(userMessage)) {
+      response = '¡Hola! Es un placer saludarte. ¿Qué información necesitas?';
+    } else if (/Ayuda|Soporte/i.test(userMessage)) {
+      response = 'Claro, dime en qué puedo asistirte.';
+    } else if (/Gracias/i.test(userMessage)) {
+      response = '¡De nada! Siempre estoy aquí para ayudarte.';
+    } else {
+      response = 'Lo siento, no entendí tu pregunta. ¿Puedes intentar formularla de otra manera?';
     }
+
+    // Añadir la respuesta del bot al chat
+    setTimeout(() => {
+      this.addMessage(response, 'bot');
+
+      // Enviar la respuesta del bot a la API para guardarla en la base de datos
+      this.sendBotMessageToAPI(response);
+    }, 1000);
+  },
+
+  async sendBotMessageToAPI(messageContent) {
+    try {
+      await axios.post(`${API_BASE_URL}/new`, {
+        messageContent: messageContent,
+        sendDate: new Date().toISOString().split('T')[0],
+        userIdSender: 2, // El ID del bot, asumiendo que el bot tiene un ID de usuario asignado
+        userIdReceiver: 1 // El ID del usuario, esto puede variar según la lógica de tu aplicación
+      });
+    } catch (error) {
+      console.error('Error al enviar el mensaje del bot', error);
+    }
+  },
   }
 };
 </script>
@@ -127,9 +149,9 @@ export default {
   }
   
   .bot {
-    background: #ffffff;
-  }
-  
+  background: white;; /* Un gris más oscuro para ver si se aplica */
+  color: black; /* Asegúrate de que el color del texto sea visible */
+}
   .user {
     background: #4c64b4;
     color: white;
