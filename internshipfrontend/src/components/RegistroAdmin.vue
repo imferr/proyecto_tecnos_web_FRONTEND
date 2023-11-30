@@ -6,59 +6,6 @@
         <img src="@/assets/logo_Universidad.png" alt="Logo" class="logo" />
         <h2>REGISTRARSE</h2>
         <p>ADMINISTRADOR DE UNA EMPRESA</p>
-
-        <div class="form-group">
-          <div class="half-width">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" v-model="nombre" />
-          </div>
-          <div class="half-width">
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" v-model="apellido" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="half-width-first">
-            <label for="email">Correo Electrónico:</label>
-            <input type="email" id="email" v-model="email" />
-          </div>
-          <div class="half-width-first">
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" v-model="password" />
-          </div>
-          <div class="half-width-first">
-            <label for="telefono">Número de Teléfono:</label>
-            <input type="tel" id="telefono" v-model="telefono" />
-          </div>
-          <div>
-            <label>Género:</label>
-          </div>
-          <div>
-            <label for="hombre">Hombre</label>
-            <label for="mujer">Mujer</label>
-          </div>
-          <div>
-            <input type="radio" id="hombre" value="hombre" v-model="genero" />
-            <input type="radio" id="mujer" value="mujer" v-model="genero" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="third-width">
-            <label for="carnet">Carnet de Identidad:</label>
-            <input type="text" id="carnet" v-model="carnet" />
-          </div>
-          <div class="third-width">
-            <label for="nacimiento">Fecha de Nacimiento:</label>
-            <input type="date" id="nacimiento" v-model="nacimiento" />
-          </div>
-          <div class="third-width">
-            <label for="direccion">Dirección:</label>
-            <input type="text" id="direccion" v-model="direccion" />
-          </div>
-        </div>
-
         <div class="form-group">
           <div class="half-width">
             <label for="cargo">Cargo:</label>
@@ -177,20 +124,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 120vh;
+  height: 70vh;
 }
 
 .registro-box {
-  margin-top: 100px;
+  margin-top: 2px;
   text-align: center;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 40px;
-  background-color: #f9f9f9;
   background-color: rgba(255, 255, 255, 0.85);
   max-width: 800px;
   width: 100%;
-  height: 110vh;
+  /* Eliminar la altura fija */
 }
 .logo {
   display: block;

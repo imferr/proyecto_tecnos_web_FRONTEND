@@ -11,7 +11,6 @@
           <div class="card-body">
             <div class="title-row">
               <h2 class="card-title">CONVENIOS</h2>
-              <button class="btn add-btn">AÑADIR</button>
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <button class="btn view-btn"  @click="verConvenios">VER CONVENIOS</button>
