@@ -4,7 +4,7 @@
     <div class="espacio"></div>
     <div class="profile-content">
       <div class="profile-header">
-        <h2>Información perfil</h2>
+        <h2>Información del perfil</h2>
       </div>
       <div class="profile-form">
         <form>

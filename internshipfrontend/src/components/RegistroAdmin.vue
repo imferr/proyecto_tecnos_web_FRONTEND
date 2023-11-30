@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <app-navbar></app-navbar>
+    <NavBarLogin/>
     <div class="registro-admin">
       <div class="registro-box">
         <img src="@/assets/logo_Universidad.png" alt="Logo" class="logo" />
@@ -29,13 +29,16 @@
 
 <script>
 import AppNavbar from "../components/AppNavbar.vue";
+import axios from "axios";
+import Swal from "sweetalert2";
+import NavBarLogin from "../components/NavBarLogin.vue";
 import RegistroAdminAPI from "../services/RegistroAdminAPI.js";
 import Swal from "sweetalert2";
 
 
 export default {
   components: {
-    AppNavbar,
+    NavBarLogin,
   },
   data() {
     return {
@@ -126,16 +129,20 @@ select {
   border-radius: 20px;
 }
 
-.btn-registrar {
-  width: 25%;
-  padding: 5px;
+button {
+  width: 40%;
+  padding: 3px;
   margin-top: 10px;
-  background-color: #4c64b4;
+  background-color: #4c64b4; 
   color: #fff;
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  margin-right: -30pc;
+  transition: background-color 0.3s; 
+}
+
+button:hover {
+  background-color: #b6a358; 
 }
 
 .form-group {

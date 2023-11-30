@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppNavbar />
+    <NavBarLogin/>
   </div>
      <div id="app">
   <div class="login-container">
@@ -38,11 +38,11 @@
 </template>
 
 <script>
-import AppNavbar from '../components/AppNavbar.vue'; 
+import NavBarLogin from '../components/NavBarLogin.vue'; 
 import LoginAPI from '../services/LoginAPI.js'; 
 export default {
   components: {
-    AppNavbar, 
+    NavBarLogin, 
   },
   
   mixins: [LoginAPI],
@@ -115,11 +115,16 @@ button {
   width: 40%;
   padding: 3px;
   margin-top: 10px;
-  background-color: #4c64b4;
+  background-color: #4c64b4; 
   color: #fff;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.3s; 
+}
+
+button:hover {
+  background-color: #b6a358; 
 }
 
 .error {

@@ -13,7 +13,7 @@
             <h1>REGISTRO DE CONVOCATORIAS</h1>
             <h2>Convocatorias publicadas:</h2>
           </div>
-          <button class="add-button" @click="addConvocatoria">AÑADIR</button>
+          <button class="add-button" @click="addConvocatoria">AÑADIR REGISTRO DE CONVOCATORIA</button>
         </div>
         <div class="internship-container">
           <div class="internship-list">
@@ -21,7 +21,7 @@
               <img src="https://www.eduquality.org/wp-content/uploads/pexels-andre-furtado-2916826-1-1024x683.jpg" alt="INTERCAMBIO CANADA" />
               <div class="title-edit-container">
                 <div class="title-icon-wrapper">
-                <h3>INTERCAMBIO CANADA</h3>
+                <h3>PASANTÍA BANCO BCP</h3>
                 <i class="fas fa-edit"></i>
               </div>
             </div>
@@ -33,7 +33,7 @@
               <img src="https://i0.wp.com/unitedkingdom.unam.mx/wp-content/uploads/2021/02/academic-exchange-intercambio-academico-unam-united-kingdom-reino-unido.jpg?fit=1944%2C995&ssl=1" alt="INTERCAMBIO MEXICO" />
               <div class="title-edit-container">
                 <div class="title-icon-wrapper">
-                <h3>INTERCAMBIO MEXICO</h3>
+                <h3>PASANTÍA BANCO BNB</h3>
                 <i class="fas fa-edit"></i>
               </div>
               </div>
@@ -45,7 +45,7 @@
               <img src="https://colombianabroad.com/wp-content/uploads/intercambio-usa.jpg" alt="INTERCAMBIO USA" />
               <div class="title-edit-container">
                 <div class="title-icon-wrapper"> 
-                <h3>INTERCAMBIO EN U.S.A</h3>
+                <h3>PASANTÍA BANCO BISA</h3>
                 <i class="fas fa-edit"></i>
               </div>
               </div>
@@ -113,7 +113,7 @@
   background-color: var(--main-blue);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px; /* Ajusta el padding horizontal aquí */
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -122,6 +122,7 @@
 .add-button:hover {
   background-color: var(--main-yellow);
 }
+
 
 .internship-container {
   text-align: center;

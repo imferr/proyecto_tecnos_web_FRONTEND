@@ -29,7 +29,7 @@
             <router-link class="nav-link" to="/eventos">Eventos</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/eventos">Promociones</router-link>
+            <router-link class="nav-link" to="/">Promociones</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/Mensajeria">Contacto</router-link>

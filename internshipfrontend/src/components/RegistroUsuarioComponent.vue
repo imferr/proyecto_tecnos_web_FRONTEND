@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppNavbar/>
+    <NavBarLogin/>
     <div class="componentRegistroUsuario">
       <div class="gray-container">
         <div>
@@ -240,14 +240,15 @@ background: var(--main-black);
 
 <script>
 import RegistroUsuarioAPI from '../services/RegistroUsuarioAPI.js';
-import AppNavbar from '../components/AppNavbar.vue';
+import NavBarLogin from '../components/NavBarLogin.vue';
 import Swal from "sweetalert2";
 
 
 export default {
   components: {
-    AppNavbar,
+    NavBarLogin,
   },
+  mixins: [RegistroUsuarioAPI],  
   methods: {
     async registro() {
       const selectedGender = document.querySelector('input[name="gender"]:checked');
@@ -281,7 +282,6 @@ export default {
               title: "Error en el registro",
               text: "Hubo un error al registrar al administrador. Por favor, inténtalo de nuevo.",
             });
-
       }
     },
     cancelar() {
