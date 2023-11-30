@@ -27,13 +27,11 @@
 
 <script>
 import NavBarLogin from '../components/NavBarLogin.vue';
-import LoginAPI from '../services/LoginAPI.js';
+import axios from 'axios';
 export default {
   components: {
     NavBarLogin,
   },
-
-  mixins: [LoginAPI],
 
   data() {
     return {
@@ -55,18 +53,72 @@ export default {
       this.$router.push('/home');
     },
     adminLogin() {
-      //TO DO: MANDAR Y VERICAR DATOS DEL USUARIO PARA EL LOGIN Y DESPUES MANDAR A LA RUTA
+      if (!this.email || !this.password) {
+        this.error = 'Por favor, completa todos los campos.';
+        return;
+      }
 
-      //ALGO ASÍ
-      //THEN()=>
-      this.$router.push('/home');
+      this.getAllUsers().then(users => {
+      console.log(users); // Verifica qué usuarios estás obteniendo
+      const user = users.find(u => u.email === this.email);
+      console.log(user); // Verifica si encontraste un usuario que coincida
+
+      if (user && user.password === this.password) {
+        // Verifica si el usuario es un administrador
+        this.checkIfUserIsAdmin(user.id).then(isAdmin => {
+          console.log(isAdmin); // Verifica si el usuario es un administrador
+         // if (isAdmin) {
+            this.$router.push('/home');
+        //  } else {
+          //  this.error = 'No tienes permisos de administrador.';
+          //}
+        });
+      } else {
+        this.error = 'Credenciales de usuario incorrectas.';
+      }
+    });
     },
+    getAllUsers() {
+      return axios.get('http://localhost:8080/api/v1/usuario')
+        .then(response => response.data)
+        .catch(error => {
+          console.error('Error al obtener usuarios:', error);
+          return [];
+        });
+    },
+    findUserByEmail(email) {
+      return axios.get('http://localhost:8080/api/v1/usuario')
+      .then(response => {
+        const users = response.data;
+        const user = users.find(u => u.email === email);
+        return user || null;
+      });
+    },
+    checkIfUserIsAdmin(userId) {
+  console.log("Iniciando verificación de administrador para el usuario ID:", userId);
 
-    //AÑADIR VALIDADORES DE CAMPOS, SI NO ESTA COMPLETO UN CAMPO QUE NO SE MANDE NINGUN DATO
-    //SWEET ALERT PARA MOSTRAR MENSAJES DE ERROR
-    //ALERTA DE QUE EL USUARIO NO EXISTE
-    //ALERTA DE QUE LA CONTRASEÑA ES INCORRECTA
-    //ALERTA DE LLENA TODOS LOS CAMPOS
+  return axios.get('http://localhost:8080/api/v1/administradores')
+    .then(response => {
+      console.log("Respuesta de la API de administradores:", response.data);
+
+      // Revisar si el usuario actual está en la lista de administradores
+      const administradores = response.data.administradores;
+      console.log("Lista de administradores obtenida:", administradores);
+
+      const esAdmin = administradores.some(admin => {
+        console.log("Verificando administrador con ID:", admin.userId, "y typeuserId:", admin.typeuserId);
+        return admin.userId === userId && admin.typeuserId === 2;
+      });
+
+      console.log("Resultado de la verificación de administrador:", esAdmin);
+      return esAdmin;
+    })
+    .catch(error => {
+      console.error('Error al verificar el rol de administrador:', error);
+      return true;
+    });
+},
+
   },
 };
 </script>
