@@ -241,6 +241,8 @@ background: var(--main-black);
 <script>
 import RegistroUsuarioAPI from '../services/RegistroUsuarioAPI.js';
 import AppNavbar from '../components/AppNavbar.vue';
+import Swal from "sweetalert2";
+
 
 export default {
   components: {
@@ -266,9 +268,19 @@ export default {
       try {
         const response = await RegistroUsuarioAPI.register(userFormData);
         console.log(response);
+        Swal.fire({
+                icon: "success",
+                title: "Registro exitoso",
+                text: "El registro se ha completado con éxito.",
+              });
       
       } catch (error) {
         console.error(error);
+        Swal.fire({
+              icon: "error",
+              title: "Error en el registro",
+              text: "Hubo un error al registrar al administrador. Por favor, inténtalo de nuevo.",
+            });
 
       }
     },

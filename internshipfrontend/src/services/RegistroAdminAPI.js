@@ -1,39 +1,30 @@
 import axios from 'axios';
+import Swal from "sweetalert2";
 
-export default {
-  data() {
-    return {
-      // Declaración de variables de datos relacionadas con el registro
-    };
-  },
-  methods: {
-    registrarAdmin() {
-      // Aquí deberías enviar una solicitud POST al servidor para registrar al administrador
-      const adminData = {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        email: this.email,
-        telefono: this.telefono,
-        genero: this.genero,
-        carnet: this.carnet,
-        nacimiento: this.nacimiento,
-        direccion: this.direccion,
-        cargo: this.cargo,
-        empresa: this.empresa,
-      };
 
-      axios
-        .post('URL_DEL_SERVIDOR', adminData)
-        .then((response) => {
-          // Manejar la respuesta del servidor si es necesario
-          console.log('Administrador registrado con éxito', response.data);
-          // Redirigir a una página de éxito o realizar alguna otra acción
-          this.$router.push({ name: 'registroExitoso' });
-        })
-        .catch((error) => {
-          // Manejar errores de registro
-          console.error('Error al registrar al administrador', error);
-        });
-    },
-  },
-};
+const API_BASE_URL = 'http://localhost:8080/api/v1/administradores';
+
+class RegistroAdminAPI {
+    async register(adminData) {
+        try {
+            const response = await axios.post(`${API_BASE_URL}/register`, adminData);
+            Swal.fire({
+              icon: "success",
+              title: "Registro exitoso",
+              text: "El registro se ha completado con éxito.",
+            });
+            return response.data;
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Error en el registro",
+            text: "Hubo un error al registrar al administrador. Por favor, inténtalo de nuevo.",
+          });
+            throw error;
+            
+        }
+    }
+
+}
+
+export default new RegistroAdminAPI();
