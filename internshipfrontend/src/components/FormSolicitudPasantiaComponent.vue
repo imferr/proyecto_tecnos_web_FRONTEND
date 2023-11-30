@@ -41,20 +41,20 @@
               <span class="details">Fecha postulación:</span>
               <input type="text" :value="fechaPostulacion" readonly>
             </div>
+            <!--
             <div class="input__box">
               <span class="details">Programa postulado:</span>
               <input type="text" :value="programaPostulado" readonly>
             </div>
+            -->
             <div class="input__box">
               <span class="details">Documentación:</span>
               <div class="document-buttons">
-                <div class="document-group">
-                  <span class="document-label">Documento 1:</span>
-                  <button type="button" class="download-button" @click="descargarDocumento('doc1')">DESCARGAR</button>
-                </div> 
-                <div class="document-group">
-                  <span class="document-label">Documento 2:</span>
-                  <button type="button" class="download-button" @click="descargarDocumento('doc2')">DESCARGAR</button>
+                <div v-for="(documento, index) in documentosFiltrados" :key="index">
+                  <span class="document-label">{{ nombresDocumentos[index] }}:</span><br>
+                  <div class="document-group">
+                    <button type="button" class="download-button" @click="abrirDocumento(documento.urldocumento)">VER</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -90,33 +90,65 @@ export default {
       correo: '',
       fechaNacimiento: '',
       fechaPostulacion: '',
-      programaPostulado: '',
+      nombresDocumentos: ['Carta Motivación', 'Pasaporte o Visa', 'Seguro Médico'], // Nombres predefinidos
+      documentosFiltrados: [] 
     };
   },
   methods: {
-    obtenerFormularioPorId(id) {
-      axios.get(`http://localhost:8080/api/v1/formulario-solicitud/${id}`)
-         .then(response => {
-          const formulario = response.data.formularioSolicitud;
-          this.nombres = formulario.studentId.userId.name;
-          this.apellidos = formulario.studentId.userId.lastName;
-          this.telefono = formulario.studentId.userId.phone;
-          this.cedula = formulario.studentId.userId.idCard;
-          this.direccion = formulario.studentId.userId.address;
-          this.correo = formulario.studentId.userId.email;
-          this.fechaNacimiento = formulario.studentId.userId.birthDate;
-          this.fechaPostulacion = formulario.postulationDate;
-          this.programaPostulado = formulario.postulatedProgram;
-         })
-         .catch(error => {
-           console.error('Error al obtener el formulario por ID', error);
-         });
+    formatFecha(fechaISO) {
+      return fechaISO.split('T')[0]; // Divide la cadena por 'T' y toma la primera parte
     },
+    async obtenerFormulario(id) {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/v1/formulario-solicitud/${id}`);
+        this.formularioDetalle = response.data.formularioSolicitud;
+        this.actualizarDatos();
+      } catch (error) {
+        console.error('Error al obtener el formulario:', error);
+      }
+    },
+    actualizarDatos() {
+      if (this.formularioDetalle && this.formularioDetalle.studentId) {
+        this.nombres = this.formularioDetalle.studentId.userId.name;
+        this.apellidos = this.formularioDetalle.studentId.userId.lastName;
+        this.telefono = this.formularioDetalle.studentId.userId.phone;
+        this.cedula = this.formularioDetalle.studentId.userId.carnet;
+        this.direccion = this.formularioDetalle.studentId.userId.address;
+        this.correo = this.formularioDetalle.studentId.userId.email;
+        this.fechaNacimiento = this.formularioDetalle.studentId.userId.birth;
+        this.fechaPostulacion = this.formatFecha(this.formularioDetalle.requestDate);
+      }
+      
+    },
+
+    async obtenerDocumentosPorRequestId(requestId) {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/v1/documento-electronico`);
+        const documentosElectronicos = response.data.documentosElectronicos;
+
+        // Filtrar los documentos por requestId
+        const documentosFiltrados = documentosElectronicos.filter((documento) => documento.formularioSolicitudId.requestId === requestId);
+
+        // Almacenar los documentos filtrados en la propiedad documentosFiltrados
+        this.documentosFiltrados = documentosFiltrados;
+      } catch (error) {
+        console.error('Error al obtener documentos:', error);
+      }
+    },
+    abrirDocumento(urlDocumento) {
+      // Abrir la URL del documento en una nueva pestaña o ventana
+      window.open(urlDocumento, '_blank');
+    }
+
   },
-  created() {
-    // Llama a la función para obtener el formulario por ID cuando el componente se crea
-    this.obtenerFormularioPorId(1); // Cambia el ID según sea necesario
-  },
+  mounted() {
+    const id = 12; // Reemplaza esto con el ID real que necesitas
+    this.obtenerFormulario(id);
+
+    const requestId = 12; // Reemplaza con el requestId que desees
+    this.obtenerDocumentosPorRequestId(requestId);
+  }
+
 };
 </script>
 
@@ -239,7 +271,8 @@ form .button button:hover {
   flex-direction: row; 
   justify-content: start; 
   flex-wrap: wrap; 
-  gap: 10px; 
+  gap: 10px;
+
 }
 
 .download-button {
@@ -267,11 +300,12 @@ form .button button:hover {
 .document-group {
   display: flex;
   flex-direction: column; 
-  align-items: center; 
+  align-items: center;
+  margin-right: 50px;
 }
 
 .document-label {
-  font-size: 0.75em; 
+  font-size: 0.85em; 
   color: var(--main-black); 
   font-weight: bold;
 }
@@ -282,8 +316,9 @@ form .button button:hover {
   }
 
   .document-buttons {
-    flex-direction: column; 
-  }
+  display: flex;
+  flex-direction: column;
+}
   
   .download-button {
     width: 100%; 
