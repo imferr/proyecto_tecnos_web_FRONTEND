@@ -10,6 +10,7 @@ import FormSolicitudPasantiaComponent from '../components/FormSolicitudPasantiaC
 import ListaEvaluacionPasantiaComponent from '../components/ListaEvaluacionPasantiaComponent.vue';
 import InicioBolsaTrabajoComponent from '../components/InicioBolsaTrabajoComponent.vue';
 import ListaRecepcionSolicitudesComponent from '../components/ListaRecepcionSolicitudesComponent.vue';
+import Pasantias from '../components/Pasantias.vue';
 //Paola
 import LoginComponent from '../components/LoginComponent.vue';
 import RegistroAdminComponent from '../components/RegistroAdmin.vue';
@@ -38,6 +39,8 @@ const routes = [
   { path : '/listaEvaPasantia', component: ListaEvaluacionPasantiaComponent, name: 'listaEvaPasantia' },
   { path : '/mainBolsaTrabajo', component: InicioBolsaTrabajoComponent, name: 'mainBolsaTrabajo' },
   { path : '/recepSolicitudes', component: ListaRecepcionSolicitudesComponent, name: 'recepSolicitudes' },
+  { path : '/ListaPasantias', component: Pasantias, name: 'ListaPasantias' },
+  
 
   //PAOLA
   { path: '/', component: LoginComponent, name: 'login' },
