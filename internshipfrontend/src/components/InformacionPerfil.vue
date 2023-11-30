@@ -1,14 +1,14 @@
 <template>
-    <div>
-      <AppNavbar/>
-      <div class="espacio">
-      </div>
-      <div class="profile-content">
+  <div>
+    <AppNavbar/>
+    <div class="espacio"></div>
+    <div class="profile-content">
       <div class="profile-header">
         <h2>Información perfil</h2>
       </div>
       <div class="profile-form">
         <form>
+
           <div class="form-row">
             <label for="firstName">Nombres:</label>
             <input type="text" id="firstName" v-model="profile.firstName" disabled/>
@@ -20,68 +20,96 @@
           <div class="form-row2">
             <label for="phone">Teléfono:</label>
             <input type="text" id="phone" v-model="profile.phone" disabled/>
-                <div>
-                    <label for="id">Cédula:</label>
-                </div>
-                <div>
-                    <input type="text" id="id" v-model="profile.id" disabled/>
-                </div>
+            <div>
+              <label for="id">Cédula:</label>
+            </div>
+            <div>
+              <input type="text" id="id" v-model="profile.id" disabled/>
+            </div>
           </div>
           <div class="form-row">
-            
             <label for="address">Dirección:</label>
             <input type="text" id="address" v-model="profile.address" disabled/>
           </div>
           <div class="form-row2">
-                    <label for="email">Correo:</label>
-                    <input type="text" id="email" v-model="profile.email" disabled/>
-                <div>
-                    <label for="career">Carrera:</label>
-                </div>
-                <div>
-                    <input type="text" id="career" v-model="profile.career" disabled/>
-                </div>
+            <label for="email">Correo:</label>
+            <input type="text" id="email" v-model="profile.email" disabled/>
+            <div>
+              <label for="career">Carrera:</label>
+            </div>
+            <div>
+              <input type="text" id="career" v-model="profile.career" disabled/>
+            </div>
           </div>
           <div class="form-row2">
             <label for="dob">Fecha nacimiento:</label>
             <input type="text" id="dob" v-model="profile.dob" disabled/>
-          <div>
-            <label for="semester">Semestre:</label>
+            <div>
+              <label for="semester">Semestre:</label>
             </div>
             <div>
-            <input type="text" id="semester" v-model="profile.semester" disabled/>
+              <input type="text" id="semester" v-model="profile.semester" disabled/>
             </div>
           </div>
         </form>
       </div>
     </div>
-    </div>
-  </template>
+  </div>
+</template>
   
   <script>
   import AppNavbar from '../components/AppNavbar.vue';
-  import InformacionPerfilAPI from '../services/InformacionPerfilAPI.js';
+  import InformacionPerfilAPI from '../services/InformacionPerfilAPI';
+  import axios from 'axios'; 
+  
   export default {
     components: {
-        AppNavbar,
+      AppNavbar,
     },
     mixins: [InformacionPerfilAPI],
     name: 'CardSection',
     data() {
-    return {
-      profile: {
-        firstName: 'Maria ',
-        lastName: 'Perez Perez',
-        phone: '65031650',
-        id: '110423635',
-        address: 'C. x, zona x, calle X',
-        email: 'maria@ucb.edu.bo',
-        career: 'Ingeniería de Sistemas',
-        dob: '11/11/2023',
-        semester: 'Sexto'
+      return {
+        profile: {
+          firstName: '',
+          lastName: '',
+          phone: '',
+          id: '',
+          address: '',
+          email: '',
+          career: '',
+          dob: '',
+          semester: ''
+        }
+      };
+    },
+    mounted() {
+
+    this.loadProfileData();
+      },
+      methods: {
+        async loadProfileData() {
+          try {
+
+            const studentId = 4;
+            const response = await axios.get(`http://localhost:8080/api/v1/estudiantes/${studentId}`);
+
+            const studentData = response.data.estudiante;
+
+            this.profile.firstName = studentData.userId.name;
+            this.profile.lastName = studentData.userId.lastName;
+            this.profile.phone = studentData.userId.phone;
+            this.profile.id = studentData.userId.carnet;
+            this.profile.address = studentData.userId.address;
+            this.profile.email = studentData.userId.email;
+            this.profile.career = studentData.carrier;
+            this.profile.dob = studentData.userId.birth;
+            this.profile.semester = studentData.semester;
+          } catch (error) {
+            console.error('Error al obtener los datos del estudiante:', error);
+          }
+        }
       }
-    };
-    }
   };
   </script>
   

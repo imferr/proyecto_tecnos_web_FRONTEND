@@ -1,33 +1,73 @@
 <template>
-    <div>
-      <AppNavbar/>
-      <div class="componentListaRecepcionSolicitudes">
-        <div class="gray-container">
-          <div class="title">
-            <h2>RECEPCIÓN SOLICITUDES</h2>  
-          </div>
-          <div class="container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Nro</th>
-                  <th>Nombre Postulante</th>
-                  <th>Fecha postulación</th>
-                  <th>Programa</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Aca van los datos de la lista a generar para recepcion solciitudes -->
-              </tbody>
-            </table>
-          </div>
+  <div>
+    <AppNavbar />
+    <div class="componentListaRecepcionSolicitudes">
+      <div class="gray-container">
+        <div class="title">
+          <h2>RECEPCIÓN SOLICITUDES</h2>
         </div>
+        <div class="container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nro</th>
+                <th>Nombre Postulante</th>
+                <th>Fecha postulación</th>
+                <th>Programa</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Iterar sobre los formularios -->
+              <tr v-for="(formulario, index) in formulariosSolicitud" :key="index">
+                <td>{{ formulario.requestId }}</td>
+                <td>{{ formatDate(formulario.requestDate) }}</td>
+                <td>{{ formulario.requestStatus ? 'Aprobado' : 'Pendiente' }}</td>
+                <td>{{ formulario.studentId.userId.name }} {{ formulario.studentId.userId.lastName }}</td>
+                <td>{{ formulario.studentId.carrier }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-  </template>
-  
-  <style>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      formulariosSolicitud: [], 
+    };
+  },
+  mounted() {
+
+    axios
+      .get('http://localhost:8080/api/v1/formulario-solicitud')
+      .then((response) => {
+        this.formulariosSolicitud = response.data.formulariosSolicitud;
+      })
+      .catch((error) => {
+        console.error('Error al obtener los formularios:', error);
+      });
+  },
+  methods: {
+    formatDate(dateString) {
+      if (!dateString) return ''; 
+      const date = new Date(dateString);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    },
+  },
+};
+</script>
+
+<style>
   .componentListaRecepcionSolicitudes {
   display: flex;
   height: 80%; /* Cambia el valor de 80% o el que desees */
@@ -82,14 +122,3 @@
     background-color: #f2f2f2;
   }
   </style>
-  
-  <script>
-  import AppNavbar from  '../components/AppNavbar.vue';
-  
-  export default {
-    components: {
-      AppNavbar,
-    }, 
-  };
-  </script>
-  

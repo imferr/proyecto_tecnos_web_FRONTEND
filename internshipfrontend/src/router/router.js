@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 //Rosa
 import HomePageComponent from '../components/HomePageComponent.vue';
+import RegistroUsuarioComponent from '../components/RegistroUsuarioComponent.vue';
 import LoginStudentComponent from '../components/LoginStudentComponent.vue';
 import AgregarConvocatoriaComponent from '../components/AgregarConvocatoriaComponent.vue';
 import AgregarEventosComponent from '../components/AgregarEventosComponent.vue';
@@ -9,6 +10,7 @@ import FormSolicitudPasantiaComponent from '../components/FormSolicitudPasantiaC
 import ListaEvaluacionPasantiaComponent from '../components/ListaEvaluacionPasantiaComponent.vue';
 import InicioBolsaTrabajoComponent from '../components/InicioBolsaTrabajoComponent.vue';
 import ListaRecepcionSolicitudesComponent from '../components/ListaRecepcionSolicitudesComponent.vue';
+import Pasantias from '../components/Pasantias.vue';
 //Paola
 import LoginComponent from '../components/LoginComponent.vue';
 import RegistroAdminComponent from '../components/RegistroAdmin.vue';
@@ -28,6 +30,7 @@ import Mensajeria from '../components/Mensajeria.vue';
 const routes = [
   //Rosa
   { path : '/formulario', component: LoginStudentComponent, name: 'registro' },
+  { path : '/registroUsuario', component: RegistroUsuarioComponent, name: 'registroUsuario' },
   { path : '/home', component: HomePageComponent, name: 'home' },
   { path : '/convocatoria', component: AgregarConvocatoriaComponent, name: 'convocatoria' },
   { path : '/eventos', component: AgregarEventosComponent, name: 'eventos' },
@@ -36,6 +39,8 @@ const routes = [
   { path : '/listaEvaPasantia', component: ListaEvaluacionPasantiaComponent, name: 'listaEvaPasantia' },
   { path : '/mainBolsaTrabajo', component: InicioBolsaTrabajoComponent, name: 'mainBolsaTrabajo' },
   { path : '/recepSolicitudes', component: ListaRecepcionSolicitudesComponent, name: 'recepSolicitudes' },
+  { path : '/ListaPasantias', component: Pasantias, name: 'ListaPasantias' },
+  
 
   //PAOLA
   { path: '/', component: LoginComponent, name: 'login' },

@@ -29,7 +29,7 @@
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <button class="btn view-btn"
-              @click="verConvenios"> VER PASANTÍAS</button>
+              @click="verPasantias"> VER PASANTÍAS</button>
           </div>
         </div>
       </div>
@@ -52,6 +52,9 @@
     
     verConvenios() {
     this.$router.push('/Convenios');
+  },
+  verPasantias() {
+    this.$router.push('/ListaPasantias');
   },
   formSolicitudPasantia() {
     this.$router.push('/solicitudPasantia');

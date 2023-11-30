@@ -11,23 +11,23 @@
             <div class="user__details">
               <div class="input__box">
                 <span class="details">Tipo evento:</span>
-                <input type="text" placeholder="" required>
+                <input type="text" placeholder="" required v-model="evento.tipoEvento" />
               </div>
               <div class="input__box">
                 <span class="details">Fecha inicio:</span>
-                <input type="date" placeholder="" required>
+                <input type="date" placeholder="" required v-model="evento.dateEvento" />
               </div>
               <div class="input__box">
                 <span class="details">Hora:</span>
-                <input type="time" placeholder="" required>
+                <input type="time" placeholder="" required v-model="evento.horaEvento" />
               </div>
               <div class="input__box description">
                 <span class="details">Descripción:</span>
-                <textarea placeholder="Descripción del evento..."></textarea>
+                <textarea placeholder="Descripción del evento..." v-model="evento.descriptionEvento"></textarea>
               </div>
             </div>
             <div class="button">
-              <button type="submit" value="AÑADIR" @click="eventos">Añadir</button>
+              <button type="submit" value="AÑADIR" @click.prevent="agregarEvento">Añadir</button>
               <button type="reset" value="CANCELAR" @click="eventos">Cancelar</button>
             </div>
           </form>
@@ -36,6 +36,65 @@
       </div>
     </div>
   </template>
+
+
+<script>
+
+import AgregarEventosAPI from '../services/AgregarEventosAPI.js';
+import AppNavbar from  '../components/AppNavbar.vue';
+import axios from 'axios';
+import Swal from 'sweetalert2'
+
+export default {
+  components:{
+    AppNavbar,
+  },
+  mixins: [AgregarEventosAPI],
+  data() {
+  return {
+    evento: {
+      tipoEvento: "",
+      dateEvento: "",
+      horaEvento: "",
+      descriptionEvento: "",
+      practicaRealizadaId: 1, 
+      convocatoriaPracticaId: 1, 
+    },
+  };
+},
+methods: {
+  async agregarEvento() {
+    try {
+      const fechaHoraString = `${this.evento.dateEvento}T${this.evento.horaEvento}`;
+
+      this.evento.dateEvento = fechaHoraString;
+
+      await axios.post('http://localhost:8080/api/v1/evento/register', this.evento);
+
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso',
+        text: 'El registro se ha completado con éxito.',
+      });
+    } catch (error) {
+      console.error('Error al agregar el evento:', error);
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el registro',
+        text: 'Hubo un error al registrar el evento. Por favor, inténtalo de nuevo.',
+      });
+    }
+  },
+},
+
+};   
+</script>  
+
+
+
+
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
@@ -247,18 +306,3 @@ form .button button:hover {
 
 
 
-<script>
-
-import AgregarEventosAPI from '../services/AgregarEventosAPI.js';
-import AppNavbar from  '../components/AppNavbar.vue';
-
-export default {
-  components:{
-    AppNavbar,
-  },
-  mixins: [AgregarEventosAPI],
-};   
-
-
-
-</script>  

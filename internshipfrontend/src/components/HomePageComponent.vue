@@ -65,7 +65,7 @@
               <figure class="snip1208">
     <img src="https://infoturlatam.com/wp-content/uploads/2023/08/estudiantes-viajeros1.jpg" alt="sample66"/>
     <figcaption>
-      <h3>Intercambio en canadá</h3>
+      <h3>Pasantía en bancos</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
       </p>
@@ -75,7 +75,7 @@
   <figure class="snip1208">
     <img src="https://www.travelenglish.es/wp-content/uploads/2019/10/estudiantes-16.jpg" alt="sample9"/>
     <figcaption>
-      <h3>Intercambio en Chile</h3>
+      <h3>Pasantía en empresas públicas</h3>
       <p>
        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
       </p>
@@ -85,7 +85,7 @@
   <figure class="snip1208">
     <img src="https://infoturlatam.com/wp-content/uploads/2023/08/estudiantes-viajeros1.jpg" alt="sample6"/>
     <figcaption>
-      <h3>Intercambio en Argentina</h3>
+      <h3>Pasantía en empresas privadas</h3>
       <p>
        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
       </p>
