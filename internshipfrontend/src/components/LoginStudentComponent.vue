@@ -8,7 +8,7 @@
         <p>REGISTRO PARA ESTUDIANTES</p>
         <div class="form-group">
           <div class="half-width">
-            <label for="carrera">Carrera: </label>
+            <label for="carrera">Carrera:</label>
             <input type="text" id="carrera" v-model="carrera" />
           </div>
           <div class="half-width">
@@ -24,81 +24,49 @@
 </template>
 
 <script>
-import axios from "axios";
 import AppNavbar from "../components/AppNavbar.vue";
 import LoginStudentAPI from "../services/LoginStudentAPI.js";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export default {
   components: {
     AppNavbar,
   },
-  mixins: [LoginStudentAPI],
-
   data() {
     return {
-      nombre: "",
-      apellido: "",
-      email: "",
-      contrasena: "",
-      telefono: "",
-      direccion: "",
       carrera: "",
       semestre: "",
-      carnet: "",
-      nacimiento: "",
-      genero: "",
     };
   },
   methods: {
     async registrar() {
       try {
-        const usuarioData = {
-          name: this.nombre,
-          lastName: this.apellido,
-          email: this.email,
-          password: this.contrasena,
-          phone: this.telefono,
-          address: this.direccion,
-          carnet: this.carnet,
-          birth: this.nacimiento,
-          gender: this.genero
-        };
-
-        await axios.post(
-          "http://localhost:8080/api/v1/usuario/register",
-          usuarioData
-        );
-
-        const estudianteData = {
+        const studentData = {
           semester: this.semestre,
           carrier: this.carrera,
-          userId: 1,
-          typeUserId: 1,
+          userId: 1, // Deberás obtener este valor según tu lógica de aplicación
+          typeUserId: 1 // Igualmente, ajusta este valor según tu lógica
         };
 
-        // Enviar los datos a la segunda API
-        await axios.post(
-          "http://localhost:8080/api/v1/estudiantes/register",
-          estudianteData
-        );
-
+        const response = await LoginStudentAPI.register(studentData);
+        console.log(response);
         Swal.fire({
-          icon: "success",
-          title: "Registro exitoso",
-          text: "El registro se ha completado con éxito.",
-        });
-
-        console.log("Registro exitoso");
+              icon: "success",
+              title: "Registro exitoso",
+              text: "El registro se ha completado con éxito.",
+            });
       } catch (error) {
-        console.error("Error en el registro:", error);
-
-
-      }
-    },
-  },
+        console.error(error);
+        Swal.fire({
+            icon: "error",
+            title: "Error en el registro",
+            text: "Hubo un error al registrar al administrador. Por favor, inténtalo de nuevo.",
+          });      }
+    }
+  }
 };
 </script>
+
 
 <style>
 body {
