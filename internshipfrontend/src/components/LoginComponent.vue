@@ -1,52 +1,40 @@
 <template>
   <div>
-    <AppNavbar />
+    <NavBarLogin />
   </div>
-     <div id="app">
-  <div class="login-container">
-    <div class="login-box">
-      <img src="@/assets/logo_Universidad.png" alt="Logo" class="logo" />
-      <h2>INICIO DE SESIÓN</h2>
+  <div id="app">
+    <div class="login-container">
+      <div class="login-box">
+        <img src="@/assets/logo_Universidad.png" alt="Logo" class="logo" />
+        <h2>INICIO DE SESIÓN</h2>
 
-      <label for="email">Correo:</label>
-      <input
-        type="text"
-        id="email"
-        v-model="email"
-        @input="clearError"
-        placeholder="Ingresa tu correo"
-      />
+        <label for="email">Correo:</label>
+        <input type="text" id="email" v-model="email" @input="clearError" placeholder="Ingresa tu correo" />
 
-      <label for="password">Contraseña:</label>
-      <input
-        type="password"
-        id="password"
-        v-model="password"
-        @input="clearError"
-        placeholder="Ingresa tu contraseña"
-      />
-      <div class="button-container">
-    <button @click="login">Iniciar Sesión</button> 
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" v-model="password" @input="clearError" placeholder="Ingresa tu contraseña" />
+        <div class="button-container">
+          <button @click="login">Iniciar Sesión</button>
 
-    <button @click="adminLogin">Iniciar Sesión Administrador</button>
-  </div>
+          <button @click="adminLogin">Iniciar Sesión Administrador</button>
+        </div>
 
-      <p class="error" v-if="error">{{ error }}</p>
+        <p class="error" v-if="error">{{ error }}</p>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
-import AppNavbar from '../components/AppNavbar.vue'; 
-import LoginAPI from '../services/LoginAPI.js'; 
+import NavBarLogin from '../components/NavBarLogin.vue';
+import LoginAPI from '../services/LoginAPI.js';
 export default {
   components: {
-    AppNavbar, 
+    NavBarLogin,
   },
-  
+
   mixins: [LoginAPI],
-  
+
   data() {
     return {
       email: '',
@@ -54,21 +42,38 @@ export default {
       error: '',
     };
   },
-  
+
   methods: {
     clearError() {
       this.error = '';
     },
     login() {
-    this.$router.push('/registro-admin');
-  },
+      //TO DO: MANDAR Y VERICAR DATOS DEL USUARIO PARA EL LOGIN Y DESPUES MANDAR A LA RUTA
+
+      //ALGO ASÍ
+      //THEN()=>
+      this.$router.push('/home');
+    },
+    adminLogin() {
+      //TO DO: MANDAR Y VERICAR DATOS DEL USUARIO PARA EL LOGIN Y DESPUES MANDAR A LA RUTA
+
+      //ALGO ASÍ
+      //THEN()=>
+      this.$router.push('/home');
+    },
+
+    //AÑADIR VALIDADORES DE CAMPOS, SI NO ESTA COMPLETO UN CAMPO QUE NO SE MANDE NINGUN DATO
+    //SWEET ALERT PARA MOSTRAR MENSAJES DE ERROR
+    //ALERTA DE QUE EL USUARIO NO EXISTE
+    //ALERTA DE QUE LA CONTRASEÑA ES INCORRECTA
+    //ALERTA DE LLENA TODOS LOS CAMPOS
   },
 };
 </script>
 
 <style scoped>
 .login-container {
-  font-family: 'Arial', sans-serif; 
+  font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,7 +88,7 @@ export default {
   border: 1px solid #ccc;
   border-radius: 40px;
   background-color: #f9f9f9;
-  background-color: rgba(255, 255, 255, 0.85); 
+  background-color: rgba(255, 255, 255, 0.85);
   max-width: 400px;
   width: 100%;
 }
@@ -120,6 +125,11 @@ button {
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #b6a358;
 }
 
 .error {
@@ -129,16 +139,16 @@ button {
 
 .button-container {
   display: flex;
-  justify-content: space-evenly; 
-  margin-top: 10px; 
+  justify-content: space-evenly;
+  margin-top: 10px;
 }
 </style>
 <style>
 body {
   background-image: url('@/assets/background.jpg');
-  background-size: cover; 
+  background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed; 
+  background-attachment: fixed;
 }
 </style>
 

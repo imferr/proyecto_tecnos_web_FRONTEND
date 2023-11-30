@@ -36,8 +36,12 @@
 
 <script>
 import axios from 'axios';
+import AppNavbar from '../components/AppNavbar.vue';
 
 export default {
+  components: {
+      AppNavbar,
+    },
   data() {
     return {
       formulariosSolicitud: [], 

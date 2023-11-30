@@ -52,7 +52,7 @@
 </template>
 
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 
 * {
@@ -82,7 +82,7 @@ margin-bottom: 10px;
 
 .componentAgregarConvocatoria {
   display: flex;
-  height: 80%; /* Cambia el valor de 80% o el que desees */
+  height: 80%; 
   justify-content: center;
   align-items: center;
   padding: 10px;
@@ -98,7 +98,7 @@ margin-bottom: 10px;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 20px; /* Ajusta este valor según sea necesario */
+  margin-top: 20px; 
 }
 .container form{
   position: relative;
@@ -144,6 +144,7 @@ form .user__details .input__box {
 }
 
 /* Botones */
+
 form .button {
   position: absolute;
   bottom: 0;
@@ -153,21 +154,28 @@ form .button {
 }
 
 form .button button {
-  height: 100%;
-  margin-top: 20px; 
-  display: inline-block; 
-  padding: 0 25px; 
+  height: 45px;
+  padding: 10px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
   outline: none;
   color: #fff;
   border: none;
-  font-size: 14px;
   font-weight: 500;
-  border-radius: 5px;
   cursor: pointer;
   transition: all 0.4s ease;
-  background: var(--main-yellow); 
-  align-items: center;
+  background: #4c64b4;
 }
+
+/* Cambio de color al pasar el cursor */
+form .button button:hover {
+  background-color: #b6a358; 
+}
+
 
 /* Responsive */
 @media (max-width: 584px) {

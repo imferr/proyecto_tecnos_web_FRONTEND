@@ -1,27 +1,31 @@
 <template>
   <div>
     <AppNavbar/>
-  <div class = "espacio">
-  </div>
-    <div class="pasantias-section">
-      <div class="container">
-        <div class="row">
-          <div v-for="pasantia in pasantia" :key="pasantia.id" class="col-md-4 mb-4">
-             <div class="card">
-              <div class="card-img-container">
-                <img :src="pasantia.imagen" class="card-img-top" :alt="pasantia.nombre">
-              </div>
-              <div class="card-body">
-                <div class="card-title-container">
-                <h5 class="card-title">{{ pasantia.nombre }}</h5>
-                <button class="btn btn-secondary">ver mas</button> 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <div class="componentPasantias">
+      <div class="gray-container">
+        <div class="header-with-button">
+          <div>
+            <h1>PASANTIAS</h1>
+          </div>
+        </div>
+        <div class="internship-container">
+          <div class="internship-list">
+            <div v-for="pasantia in pasantia" :key="pasantia.id" class="internship-item">
+              <img :src="pasantia.imagen" alt="" />
+              <div class="title-edit-container">
+                <div class="title-icon-wrapper">
+                  <h3>{{ pasantia.nombre }}</h3>
+                  <button>VER MÁS</button>
                 </div>
-                <p class="card-text">{{ pasantia.descripcion }}</p>
-                <div class="card-buttons">
-                  <a href="#" class="btn btn-primary">Formulario de solicitud</a>
-                  <a href="#" class="btn btn-secondary">Subir documentación</a>
-                </div>
               </div>
+              <p>{{ pasantia.descripcion }}</p>
+              <button>Formulario de solicitud</button>
+              <button>Subir Documentación</button>
             </div>
           </div>
         </div>
@@ -30,16 +34,14 @@
   </div>
 </template>
 
+<script>
+import AppNavbar from '../components/AppNavbar.vue'; 
+import PasantiasAPI from '../services/PasantiasAPI.js';
 
-
-
-  <script>
- import AppNavbar from '../components/AppNavbar.vue'; 
- import PasantiasAPI from '../services/PasantiasAPI.js';
 export default {
   components: {
     AppNavbar, 
-    },
+  },
   mixins: [PasantiasAPI],
   name: 'ListaPasantias',
   data() {
@@ -48,145 +50,148 @@ export default {
         {
           id: 1,
           nombre: 'PASANTIA 1',
-          descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et quam vitae sapien tincidunt gravida.',
+          descripcion: 'Descripción de la pasantía 1',
           imagen: 'https://www.clarin.com/img/2021/04/23/2hDNHGgJf_1200x0__1.jpg'
         },
         {
           id: 2,
           nombre: 'PASANTIA 2',
-          descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et quam vitae sapien tincidunt gravida.',
+          descripcion: 'Descripción de la pasantía 2',
           imagen: 'https://incareersjobs.com/wp-content/uploads/2020/11/Tiempo-libre-para-los-estudiantes.jpeg'
         },
         {
           id: 3,
           nombre: 'PASANTIA 3',
-          descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et quam vitae sapien tincidunt gravida.',
+          descripcion: 'Descripción de la pasantía 3',
           imagen: 'https://www.clarin.com/img/2021/04/23/2hDNHGgJf_1200x0__1.jpg'
-        },
+        }
       ],
     }
   },
   methods: {
-    //metodos
+    cancelar() {
+      this.$router.go(-1);
+    }
   },
 };
 </script>
-  
+
+
 <style scoped>
- .espacio{
-    margin-top: 90px;
-  }
-
-.pasantias-section .container {
-  padding-top: 120px; 
-  border-radius: 15px; 
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); 
-    padding: 2rem; 
-  padding-bottom: 100px;
-  height: 110vh;
-}
-.card-title-container {
+.componentPasantias {
   display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between; 
-  margin-bottom: 1rem; 
+  padding: 10px;
+  background-image: url('../assets/fondo_principal.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.pasantias-section .card {
-  margin-top: 90px;
-  margin-bottom: -2rem;
-  overflow: hidden; 
-  position: relative;
-  border: none; 
-  border-radius: 25px; 
-}
-
-
-.pasantias-section .card-img-top {
-  align-items: center;
-  width: 100%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  margin-left: -2px;
-  transition: transform .3s ease;
-}
-
-.pasantias-section .card-body {
-  font-family: 'Arial', sans-serif;
-  width: 100%; 
-    position: relative;
-  margin-top: 10px;
-  margin-left: 7px; 
-  top: -25px;
-    padding: 1rem;
+.gray-container {
+  width: 90%; 
+  background-color: rgba(228, 219, 219, 0.639); 
+  padding: 20px;
   border-radius: 15px;
-  z-index: 1; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px; 
 }
 
-.card-title {
-  margin: 0; 
-}
-
-.btn {
-  border: none;
-  border-radius: 20px;
-  padding: 0.5rem 1rem;
-  color: white;
-  cursor: pointer;
-  text-align: center;
-  background-color: #4c64b4; 
-  text-decoration: none;
-  display: inline-block; 
-  min-width: 90px; 
-  max-width: 200px; 
-}
-
-
-.pasantias-section .btn {
-  font-family: 'Arial', sans-serif;
-  border-radius: 25px; 
-  padding: 0.5rem 1.0rem; 
-  flex: 1; 
-  margin: 0 10px; 
-  border: none; 
-}
-
-.pasantias-section .card-img-container {
-  margin-left: 5px; 
-  position: relative; 
-  z-index: 2; 
-} 
-
-.pasantias-section .card-img-top:hover {
-  transform: scale(1.05);
-}
-
-.pasantias-section .card-buttons {
-  font-family: 'Arial', sans-serif;
-  width: 320px; 
+.header-with-button {
   display: flex;
-  justify-content: space-between; 
-  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
+.internship-container {
+  text-align: center;
+}
 
+.internship-container h1,
+.internship-container h2 {
+  color: #111111;
+  margin-bottom: 20px;
+}
 
+.internship-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-.pasantias-section .btn-primary {
+.internship-item {
+  width: 300px;
+  border: 1px solid #b8b0b0;
+  border-radius: 10px;
+  background-color: white;
+  transition: transform 0.3s ease;
+}
+
+.internship-item:hover {
+  transform: translateY(-5px);
+}
+
+.internship-item img {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.internship-item h3 {
+  color: #111111;
+  margin: 10px;
+  font-size: 20px;
+}
+
+.internship-item p {
+  padding: 0 10px;
+  color: #b8b0b0;
+}
+
+.internship-item button {
   background-color: #4c64b4;
-  text-decoration: none; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 10px;
 }
 
-.pasantias-section .btn-secondary {
-  background-color: #4c64b4;
-  text-decoration: none; 
+.internship-item button:hover {
+  background-color: #b6a358;
 }
 
-.pasantias-section .btn-primary:hover {
-  background-color: #1e294e; 
+.title-edit-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
 }
 
-.pasantias-section .btn-secondary:hover {
-  background-color: #1e294e; 
+.title-edit-container h3 {
+  margin: 5px 25px;
+  display: inline-block; 
+  font-size: 20px; 
+}
+
+@media only screen and (max-width: 768px) {
+  .internship-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .gray-container {
+    width: 100%; 
+  }
 }
 </style>

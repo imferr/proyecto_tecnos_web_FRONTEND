@@ -246,25 +246,29 @@ form .user__details .input__box {
 }
 
 form .button {
-  height: 30px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
+  gap: 10px; /* Añade espacio entre los botones si es necesario */
 }
 
 form .button button {
-  height: 100%;
-  padding: 0 25px; 
+  padding: 5px 30px; 
   color: #fff;
   border: none;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 40;
   border-radius: 20px;
   background-color: var(--main-blue);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 form .button button:hover {
-  background: linear-gradient(-135deg, var(--main-yellow), var(--main-blue));
+  background-color: var(--main-yellow);
 }
+
 
 .document-buttons {
   display: flex;
@@ -276,7 +280,7 @@ form .button button:hover {
 }
 
 .download-button {
-  padding: 5px 25px; 
+  padding: 5px 50px; 
   color: #fff;
   border: none;
   font-size: 14px;
@@ -294,7 +298,7 @@ form .button button:hover {
 }
 
 .download-button:hover {
-  background: linear-gradient(-135deg, var(--main-yellow), var(--main-blue));
+  background-color: var(--main-yellow);
 }
 
 .document-group {
