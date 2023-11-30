@@ -15,39 +15,15 @@
         </div>
         <div class="internship-container">
           <div class="internship-list">
-            <div class="internship-item">
-              <img src="https://www.clarin.com/img/2021/04/23/2hDNHGgJf_1200x0__1.jpg" alt="" />
+            <div v-for="pasantia in pasantia" :key="pasantia.id" class="internship-item">
+              <img :src="pasantia.imagen" alt="" />
               <div class="title-edit-container">
                 <div class="title-icon-wrapper">
-                <h3>PASANTIA 1</h3>
-                <button>VER MÁS</button>
+                  <h3>{{ pasantia.nombre }}</h3>
+                  <button>VER MÁS</button>
+                </div>
               </div>
-            </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-              <button>Formulario de solicitud</button>
-              <button>Subir Documentación</button>
-            </div>
-            <div class="internship-item">
-              <img src="https://web.upacifico.edu.ec/wp-content/uploads/2022/02/computo-1024x683.jpg" alt="" />
-              <div class="title-edit-container">
-                <div class="title-icon-wrapper">
-                <h3>PASANTIA 2 </h3>
-                <button>VER MÁS</button>
-              </div>
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-              <button>Formulario de solicitud</button>
-              <button>Subir Documentación</button>
-            </div>
-            <div class="internship-item">
-              <img src="https://www.clarin.com/img/2021/04/23/2hDNHGgJf_1200x0__1.jpg" alt="" />
-              <div class="title-edit-container">
-                <div class="title-icon-wrapper"> 
-                <h3>PASANTIA 3</h3>
-                <button>VER MÁS</button>
-              </div>
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam... </p>
+              <p>{{ pasantia.descripcion }}</p>
               <button>Formulario de solicitud</button>
               <button>Subir Documentación</button>
             </div>
@@ -58,25 +34,51 @@
   </div>
 </template>
 
+<script>
+import AppNavbar from '../components/AppNavbar.vue'; 
+import PasantiasAPI from '../services/PasantiasAPI.js';
+
+export default {
+  components: {
+    AppNavbar, 
+  },
+  mixins: [PasantiasAPI],
+  name: 'ListaPasantias',
+  data() {
+    return {
+      pasantia: [
+        {
+          id: 1,
+          nombre: 'PASANTIA 1',
+          descripcion: 'Descripción de la pasantía 1',
+          imagen: 'https://www.clarin.com/img/2021/04/23/2hDNHGgJf_1200x0__1.jpg'
+        },
+        {
+          id: 2,
+          nombre: 'PASANTIA 2',
+          descripcion: 'Descripción de la pasantía 2',
+          imagen: 'https://incareersjobs.com/wp-content/uploads/2020/11/Tiempo-libre-para-los-estudiantes.jpeg'
+        },
+        {
+          id: 3,
+          nombre: 'PASANTIA 3',
+          descripcion: 'Descripción de la pasantía 3',
+          imagen: 'https://www.clarin.com/img/2021/04/23/2hDNHGgJf_1200x0__1.jpg'
+        }
+      ],
+    }
+  },
+  methods: {
+    cancelar() {
+      this.$router.go(-1);
+    }
+  },
+};
+</script>
+
+
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-:root {
-  --main-blue: #4c64b4;
-  --main-yellow: #b6a358;
-  --main-grey: #dddada;
-  --sub-grey: #b8b0b0;
-  --main-black: #111111;
-}
-
-.componentPasantias{
+.componentPasantias {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -98,7 +100,6 @@
   margin-top: 20px; 
 }
 
-
 .header-with-button {
   display: flex;
   justify-content: space-between;
@@ -112,12 +113,8 @@
 
 .internship-container h1,
 .internship-container h2 {
-  color: var(--main-black);
+  color: #111111;
   margin-bottom: 20px;
-}
-.header-with-button h1,
-.header-with-button h2 {
-  color: var(--main-black);
 }
 
 .internship-list {
@@ -129,11 +126,12 @@
 
 .internship-item {
   width: 300px;
-  border: 1px solid var(--sub-grey);
+  border: 1px solid #b8b0b0;
   border-radius: 10px;
   background-color: white;
   transition: transform 0.3s ease;
 }
+
 .internship-item:hover {
   transform: translateY(-5px);
 }
@@ -147,19 +145,18 @@
 }
 
 .internship-item h3 {
-  color: var(--main-black);
+  color: #111111;
   margin: 10px;
-  font-size: 20px; /* Adjust the size to your preference */
+  font-size: 20px;
 }
-
 
 .internship-item p {
   padding: 0 10px;
-  color: var(--sub-grey);
+  color: #b8b0b0;
 }
 
 .internship-item button {
-  background-color: var(--main-blue);
+  background-color: #4c64b4;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -171,22 +168,20 @@
 }
 
 .internship-item button:hover {
-  background-color: var(--main-yellow);
+  background-color: #b6a358;
 }
+
 .title-edit-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
 }
+
 .title-edit-container h3 {
   margin: 5px 25px;
   display: inline-block; 
   font-size: 20px; 
-}
-
-.title-edit-container > * {
-  margin-right: 5px; /* Ajusta el margen derecho para todos los elementos dentro del contenedor */
 }
 
 @media only screen and (max-width: 768px) {
@@ -200,27 +195,3 @@
   }
 }
 </style>
-
-
-
-
-<script>
-import PasantiasAPI from '../services/PasantiasAPI.js';
-import AppNavbar from '../components/AppNavbar.vue';
-
-export default {
-  name: 'ListaPasantias', 
-  components: {
-    AppNavbar,
-  },
-  mixins: [PasantiasAPI],
-  methods: {
-    cancelar() {
-      // Navega a la vista anterior en el historial de navegación
-      this.$router.go(-1);
-    }
-  }
-};
-</script>
-
-  
