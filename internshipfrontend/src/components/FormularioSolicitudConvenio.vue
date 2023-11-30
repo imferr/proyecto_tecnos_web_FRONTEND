@@ -82,31 +82,62 @@ export default {
       carta: "",
       pasaporte: "",
       seguro: "",
-      studentId: 1,
+      studentId: 2,
       requestStatus: false,
+      uploadedUrls: [],
 
       documentos: {
         carta: {
+          nombre: "",
           tipo: "Carta de Motivación",
-          descripcion: "Descripción de la carta de motivación",
+          url: "",
         },
         pasaporte: {
+          nombre: "",
           tipo: "Pasaporte",
-          descripcion: "Descripción del pasaporte",
+          url: "",
         },
         seguro: {
+          nombre: "",
           tipo: "Seguro Médico",
-          descripcion: "Descripción del seguro médico",
+          url: "",
         },
       },
     };
   },
   methods: {
-    handleFileUpload(event, fileVariable) {
-      if (event.target.files.length > 0) {
-        this[fileVariable] = event.target.files[0].name; 
-      }
+    logDocumentos() {
+    console.log(this.documentos);
     },
+    async handleFileUpload(event, fileVariable) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      let formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await axios.post('http://localhost:8080/api/v1/media/upload', formData);
+        const url = response.data.url; // Extrae la URL del archivo cargado de la respuesta
+        console.log('URL del archivo cargado:', url);
+
+
+        // Forma segura de usar hasOwnProperty
+        if (Object.prototype.hasOwnProperty.call(this.documentos, fileVariable)) {
+          this.documentos[fileVariable].url = url;
+          this.documentos[fileVariable].nombre = file.name;
+        }
+      } catch (error) {
+        console.error('Error al cargar el archivo:', error);
+      }
+    }
+  },
+
+  joinDocumentNames() {
+    return Object.values(this.documentos)
+      .map(doc => doc.nombre) // Extrae el nombre de cada documento
+      .filter(nombre => nombre !== '') // Filtra los nombres no vacíos
+      .join(', '); // Une los nombres con una coma y un espacio
+  },
 
     getCurrentDateString() {
       const today = new Date();
@@ -114,9 +145,9 @@ export default {
     },
 
     async submitForm() {
-      const attachedDocuments = [this.carta, this.pasaporte, this.seguro]
-        .filter((name) => name !== "")
-        .join(", ");
+      let formularioId = 0;
+      try {
+      const attachedDocuments = this.joinDocumentNames(); 
 
       const formData = {
         requestDate: this.getCurrentDateString(),
@@ -124,33 +155,46 @@ export default {
         attachedDocument: attachedDocuments,
         studentId: this.studentId,
       };
+    
+      console.log("Formulario de solicitud de convenio:", formData);
+      const response = await axios.post(API_BASE_URL, formData);
 
-      try {
+      if (response.data && response.data.formularioSolicitudId) {
+        formularioId = response.data.formularioSolicitudId; // Guarda el ID aquí
+        console.log("ID del formulario creado:", formularioId);
+      } else {
+        // Manejar el caso en que la respuesta no tiene el ID
+        console.error("El formulario fue creado pero no se recibió un ID válido.");
+      }
 
-        await axios.post(API_BASE_URL, formData);
+    
+      for (const key in this.documentos) {
+        if (Object.prototype.hasOwnProperty.call(this.documentos, key)) {
+            const documento = this.documentos[key];
 
-        // Registrar cada documento individualmente
-        for (const key of Object.keys(this.documentos)) {
-          const documentName = this[key];
-          if (documentName) {
             const documentData = {
-              tipoDocumento: this.documentos[key].tipo,
-              nombreDocumento: documentName,
-              contenidoDocumento: this.documentos[key].descripcion,
-              formularioSolicitudID: 1, // ID del formulario, asumiendo que es necesario
-            };
-            await axios.post(
-              "http://localhost:8080/api/v1/documento-electronico/register",
-              documentData
-            );
-          }
-        }
+                tipoDocumento: documento.tipo,
+                nombreDocumento: documento.nombre,
+                URLDocumento: documento.url,
+                formularioSolicitudID: formularioId,
+              };
+
+              try {
+                await axios.post('http://localhost:8080/api/v1/documento-electronico/register', documentData);
+                console.log("Documento enviado con éxito: ", documentData);
+              } catch (error) {
+                console.error("Error al enviar el documento: ", documentData, error);
+              }
+            }
+  }
+
 
         Swal.fire({
           icon: "success",
           title: "Formulario enviado",
           text: "El formulario y los documentos se han enviado con éxito.",
         });
+
 
         console.log("Formulario y documentos enviados con éxito");
       } catch (error) {
