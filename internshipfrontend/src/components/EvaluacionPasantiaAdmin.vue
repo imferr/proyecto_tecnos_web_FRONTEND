@@ -1,6 +1,6 @@
 <template>
     <div>
-        <AppNavbar/>
+        <AppNavbarAdmin/>
     <div class="espacio">
     </div>
         <div class="container">
@@ -11,16 +11,6 @@
           <div class="input-group">
             <label>Nombres:</label>
             <input type="text" v-model="form.names">
-          </div>
-
-          <div class="input-group">
-            <label>Teléfono:</label>
-            <input type="text" v-model="form.phone">
-          </div>
-
-          <div class="input-group">
-            <label>Dirección:</label>
-            <input type="text" v-model="form.address">
           </div>
 
           <div class="input-group">
@@ -45,15 +35,6 @@
             <input type="text" v-model="form.surnames">
           </div>
 
-          <div class="input-group">
-            <label>Cédula:</label>
-            <input type="text" v-model="form.id">
-          </div>
-
-          <div class="input-group">
-            <label>Fecha nacimiento:</label>
-            <input type="date" v-model="form.birthDate">
-          </div>
 
           <div class="input-group">
             <label>Programa postulado:</label>
@@ -83,11 +64,11 @@
 </template>
   
   <script>
- import AppNavbar from '../components/AppNavbar.vue';
+ import AppNavbarAdmin from '../components/AppNavbarAdmin.vue';
  import EvaluacionPasantiaAPI from '../services/EvaluacionPasantiaAPI.js';
 export default {
   components: {
-    AppNavbar, 
+    AppNavbarAdmin, 
   },
   mixins: [EvaluacionPasantiaAPI],
 

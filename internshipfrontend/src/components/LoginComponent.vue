@@ -53,7 +53,8 @@ export default {
       this.$router.push('/home');
     },
     adminLogin() {
-      if (!this.email || !this.password) {
+      this.$router.push('/homeAdmin');
+      /*if (!this.email || !this.password) {
         this.error = 'Por favor, completa todos los campos.';
         return;
       }
@@ -76,7 +77,7 @@ export default {
       } else {
         this.error = 'Credenciales de usuario incorrectas.';
       }
-    });
+    });*/
     },
     getAllUsers() {
       return axios.get('http://localhost:8080/api/v1/usuario')

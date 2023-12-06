@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppNavbar />
+    <AppNavbarAdmin/>
     <div class="componentListaRecepcionSolicitudes">
       <div class="gray-container">
         <div class="title">
@@ -36,11 +36,11 @@
 
 <script>
 import axios from 'axios';
-import AppNavbar from '../components/AppNavbar.vue';
+import AppNavbarAdmin from '../components/AppNavbarAdmin.vue';
 
 export default {
   components: {
-      AppNavbar,
+      AppNavbarAdmin,
     },
   data() {
     return {

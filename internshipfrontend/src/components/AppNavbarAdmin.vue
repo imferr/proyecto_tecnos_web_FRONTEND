@@ -14,22 +14,19 @@
     <div class="collapse navbar-collapse" id="nav-collapsible">
       <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/home">Inicio</router-link>
+            <router-link class="nav-link" to="/homeAdmin">Inicio</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Informacion-Perfil">Perfil</router-link>
+            <router-link class="nav-link" to="/InformacionPerfilAdmin">Perfil</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/mainBolsaTrabajo">Bolsa Trabajo</router-link>
+            <router-link class="nav-link" to="/recepSolicitudesAdmin">Recepción de solicitudes</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Convenios-Pasantias">Convenios-Pasantias</router-link>
+            <router-link class="nav-link" to="/eventos">Eventos</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/listaEvaPasantia">Evaluaciones</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/Mensajeria">Contacto</router-link>
+            <router-link class="nav-link" to="/Evaluacion-Pasantia">Evaluación</router-link>
           </li>
         </ul>
       </div>

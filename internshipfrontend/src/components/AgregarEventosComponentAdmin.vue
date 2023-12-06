@@ -1,6 +1,6 @@
 <template>
     <div>
-      <AppNavbar/>
+      <AppNavbarAdmin/>
       <div class="componentAgregarEventos">
         <div class="gray-container">
           <div class="title">
@@ -41,13 +41,13 @@
 <script>
 
 import AgregarEventosAPI from '../services/AgregarEventosAPI.js';
-import AppNavbar from  '../components/AppNavbar.vue';
+import AppNavbarAdmin from  '../components/AppNavbarAdmin.vue';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 
 export default {
   components:{
-    AppNavbar,
+    AppNavbarAdmin,
   },
   mixins: [AgregarEventosAPI],
   data() {

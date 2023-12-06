@@ -188,7 +188,7 @@
   
       // Método para redirigir al componente de recepción de solicitudes
       const recepcionSolicitudes = () => {
-        router.push({ name: 'recepSolicitudes' });
+        router.push({ name: 'misSolicitudes' });
       };
   
       // Exponer los métodos al template
