@@ -20,6 +20,9 @@
             <router-link class="nav-link" to="/InformacionPerfilAdmin">Perfil</router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/convocatoria">Convocatorias</router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" to="/recepSolicitudesAdmin">Recepción de solicitudes</router-link>
           </li>
           <li class="nav-item">

@@ -13,18 +13,17 @@
                 <th>Nro</th>
                 <th>Nombre Postulante</th>
                 <th>Fecha postulación</th>
-                <th>Programa</th>
+                <th>Nombre de Convocatoria</th>
                 <th>Estado</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Iterar sobre los formularios -->
-              <tr v-for="(formulario, index) in formulariosSolicitud" :key="index">
+              <tr v-for="(formulario, index) in formulariosSolicitud" :key="index" @click="seleccionarFormulario(formulario.requestId)">
                 <td>{{ formulario.requestId }}</td>
-                <td>{{ formatDate(formulario.requestDate) }}</td>
-                <td>{{ formulario.requestStatus ? 'Aprobado' : 'Pendiente' }}</td>
                 <td>{{ formulario.studentId.userId.name }} {{ formulario.studentId.userId.lastName }}</td>
-                <td>{{ formulario.studentId.carrier }}</td>
+                <td>{{ formatDate(formulario.requestDate) }}</td>
+                <td>{{ obtenerNombreConvocatoria() }}</td>
+                <td>{{ formulario.requestStatus ? 'Aprobado' : 'Pendiente' }}</td>
               </tr>
             </tbody>
           </table>
@@ -40,22 +39,27 @@ import AppNavbarAdmin from '../components/AppNavbarAdmin.vue';
 
 export default {
   components: {
-      AppNavbarAdmin,
-    },
+    AppNavbarAdmin,
+  },
   data() {
     return {
-      formulariosSolicitud: [], 
+      formulariosSolicitud: [],
+      convocatorias: [],
     };
   },
   mounted() {
-
     axios
       .get('http://localhost:8080/api/v1/formulario-solicitud')
-      .then((response) => {
-        this.formulariosSolicitud = response.data.formulariosSolicitud;
+      .then((responseSolicitudes) => {
+        this.formulariosSolicitud = responseSolicitudes.data.formulariosSolicitud;
+
+        return axios.get('http://localhost:8080/api/v1/convocatoria');
+      })
+      .then((responseConvocatorias) => {
+        this.convocatorias = responseConvocatorias.data.convocatorias;
       })
       .catch((error) => {
-        console.error('Error al obtener los formularios:', error);
+        console.error('Error al cargar las solicitudes o convocatorias:', error);
       });
   },
   methods: {
@@ -67,9 +71,23 @@ export default {
       const day = String(date.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
     },
+    obtenerNombreConvocatoria() {
+      const convocatoriaIdPredeterminado = 1;
+      const convocatoria = this.convocatorias.find(conv => conv.convocatoriaPracticaId === convocatoriaIdPredeterminado);
+      return convocatoria ? convocatoria.titleConvocatoria : 'No encontrado';
+    },
+    seleccionarFormulario(formularioId) {
+    // Aquí puedes hacer algo con el formularioId si es necesario
+    console.log('Formulario seleccionado:', formularioId);
+    
+    // Redirigir a la ruta deseada
+    this.$router.push({ path: '/solicitudPasantia', query: { formularioId } });
+  },
   },
 };
 </script>
+
+
 
 <style>
   .componentListaRecepcionSolicitudes {

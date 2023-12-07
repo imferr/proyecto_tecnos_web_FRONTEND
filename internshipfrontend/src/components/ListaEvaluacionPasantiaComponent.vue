@@ -1,31 +1,77 @@
 <template>
-    <div>
-      <AppNavbar/>
-      <div class="componentListaEvaluacionPasantia">
-        <div class="gray-container">
-          <div class="title">
-            <h2>EVALUACIÓN PASANTÍA</h2>  
-          </div>
-          <div class="container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Nro</th>
-                  <th>Nombre Postulante</th>
-                  <th>Fecha postulación</th>
-                  <th>Programa</th>
-                  <th>Evaluación</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Aca van los datos de la lista a generar -->
-              </tbody>
-            </table>
-          </div>
+  <div>
+    <AppNavbar/>
+    <div class="componentListaEvaluacionPasantia">
+      <div class="gray-container">
+        <div class="title">
+          <h2>EVALUACIÓN PASANTÍA</h2>  
         </div>
+        <div class="container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nro</th>
+                <th>Nombre Postulante</th>
+                <th>Fecha postulación</th>
+                <th>Nombre de Convocatoria</th>
+                <th>Evaluación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="evaluacion in evaluacionesFiltradas" :key="evaluacion.evaluacionId">
+                <td>{{ evaluacion.evaluacionId }}</td>
+                <td>{{ evaluacion.evaluador.userId.name }} {{ evaluacion.evaluador.userId.lastName }}</td>
+                <td>{{ evaluacion.practicaRealizada.datePracticaRealizadaBegin }}</td>
+                <td>{{ obtenerNombreConvocatoria(evaluacion.practicaRealizada.practicaRealizadaId) }}</td>
+                <td>{{ evaluacion.notaEvaluacion }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-  </template>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import AppNavbar from  '../components/AppNavbar.vue';
+
+export default {
+  components: {
+    AppNavbar,
+  },
+  data() {
+    return {
+      evaluacionesFiltradas: [],
+      convocatorias: [],
+      userIdFiltrado: 1 // Este valor puede variar
+    };
+  },
+  mounted() {
+    axios.get('http://localhost:8080/api/v1/evaluacion')
+      .then(responseEvaluacion => {
+        return axios.get('http://localhost:8080/api/v1/convocatoria')
+          .then(responseConvocatoria => {
+            this.convocatorias = responseConvocatoria.data.convocatorias;
+            const evaluaciones = responseEvaluacion.data.evaluacionesPasantia;
+            this.evaluacionesFiltradas = evaluaciones.filter(evaluacion => 
+              evaluacion.evaluador.userId.userId === this.userIdFiltrado);
+          });
+      })
+      .catch(error => {
+        console.error('Error al cargar las evaluaciones o convocatorias:', error);
+      });
+  },
+  methods: {
+    obtenerNombreConvocatoria(practicaId) {
+      const convocatoria = this.convocatorias.find(conv => conv.convocatoriaPracticaId === practicaId);
+      return convocatoria ? convocatoria.titleConvocatoria : 'No encontrado';
+    }
+  }
+};
+</script>
+
   
   <style>
   .componentListaEvaluacionPasantia{
@@ -95,14 +141,3 @@
     background-color: #3a4c8a;
   }
   </style>
-  
-  <script>
-  import AppNavbar from  '../components/AppNavbar.vue';
-  
-  export default {
-    components: {
-      AppNavbar,
-    }, 
-  };
-  </script>
-  

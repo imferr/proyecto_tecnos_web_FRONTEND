@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppNavbar/>
+    <AppNavbarAdmin/>
     <div class="componentAgregarConvocatoria">
       <div class="gray-container">
         <h2>Añadir convocatoria</h2>
@@ -196,12 +196,13 @@ form .button button:hover {
 
 <script>
 import axios from 'axios';
-import AppNavbar from '../components/AppNavbar.vue';
+import AppNavbarAdmin from './AppNavbarAdmin.vue';
+import Swal from "sweetalert2";
 
 export default {
   components: {
-    AppNavbar,
-  },
+    AppNavbarAdmin
+},
   data() {
     return {
       form: {
@@ -218,14 +219,31 @@ export default {
     submitForm() {
       const API_URL = 'http://localhost:8080/api/v1/convocatoria/register';
       axios.post(API_URL, this.form)
-        .then(response => {
-          // Manejar la respuesta aquí, como mostrar un mensaje de éxito o redirigir
-          console.log('Convocatoria añadida:', response.data);
-        })
-        .catch(error => {
-          // Manejar errores aquí, como mostrar un mensaje de error
-          console.error('Hubo un error:', error);
+      .then(response => {
+        // Check the response status or data to determine success or failure.
+        if (response.status === 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Convocatoria añadida',
+            text: 'La convocatoria se ha añadido correctamente.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al añadir la convocatoria.',
+          });
+        }
+      })
+      .catch(error => {
+        // Handle network errors or other issues.
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al comunicarse con el servidor.',
         });
+        console.error('Hubo un error:', error);
+      });
     },
     cancelar() {
       this.$router.go(-1);

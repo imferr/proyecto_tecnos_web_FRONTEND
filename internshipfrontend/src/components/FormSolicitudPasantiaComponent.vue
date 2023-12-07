@@ -142,12 +142,17 @@ export default {
 
   },
   mounted() {
-    const id = 12; // Reemplaza esto con el ID real que necesitas
-    this.obtenerFormulario(id);
+    const requestId = +this.$route.query.formularioId;
 
-    const requestId = 12; // Reemplaza con el requestId que desees
-    this.obtenerDocumentosPorRequestId(requestId);
+    if (requestId) {
+      this.obtenerFormulario(requestId);
+      this.obtenerDocumentosPorRequestId(requestId);
+    } else {
+      console.log("No se proporcionó requestId en la URL");
+    }
   }
+
+  
 
 };
 </script>

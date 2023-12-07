@@ -54,7 +54,7 @@
       </div>
 
       <div class="actions">
-        <button class="btn evaluate">EVALUAR</button>
+        <button class="btn evaluate" @click="registrarEvaluacion">EVALUAR</button>
         <button class="btn cancel">CANCELAR</button>
       </div>
     </div>
@@ -63,39 +63,85 @@
 
 </template>
   
-  <script>
- import AppNavbarAdmin from '../components/AppNavbarAdmin.vue';
- import EvaluacionPasantiaAPI from '../services/EvaluacionPasantiaAPI.js';
+<script>
+import axios from 'axios';
+import AppNavbarAdmin from './AppNavbarAdmin'; // Asegúrate de importar correctamente tus componentes
+import Swal from 'sweetalert2';
+
 export default {
   components: {
-    AppNavbarAdmin, 
+    AppNavbarAdmin
   },
-  mixins: [EvaluacionPasantiaAPI],
-
   data() {
     return {
-        form: {
+      form: {
         names: '',
-        phone: '',
-        address: '',
+        surnames: '',
         applicationDate: '',
         startDate: '',
-        performanceNote: '',
-        surnames: '',
-        id: '',
-        birthDate: '',
-        program: '',
         endDate: '',
+        program: '',
+        performanceNote: '',
         comment: ''
-      }
+      },
+      ultimaPracticaId: null
     };
   },
-  methods: {
-    //metodos
+  mounted() {
+
   },
+  methods: {
+    registrarEvaluacion() {
+      const practicaData = {
+        datePracticaRealizadaBegin: this.form.startDate,
+        datePracticaRealizadaEnd: this.form.endDate,
+        statePracticaRealizada: true 
+      };
+
+      axios.post('http://localhost:8080/api/v1/practica/register', practicaData)
+        .then(response => {
+          console.log('Se creó de manera exitosa la práctica', response);
+          return axios.get('http://localhost:8080/api/v1/practica');
+        })
+        .then(response => {
+          const practicas = response.data.practicasRealizadas;
+          if (practicas.length > 0) {
+            const ultimaPracticaId = practicas[practicas.length - 1].practicaRealizadaId;
+            console.log('ID de la última práctica:', ultimaPracticaId);
+
+            return axios.post('http://localhost:8080/api/v1/evaluacion/register', {
+              evaluacionDesempenio: parseFloat(this.form.performanceNote),
+              comentarioEvaluacion: this.form.comment,
+              practicaRealizadaId: ultimaPracticaId,
+              evaluadorId: 1
+            });
+          } else {
+            throw new Error('No se encontraron prácticas registradas');
+          }
+        })
+        .then(response => {
+          console.log('Se registró la evaluación correctamente', response);
+          Swal.fire({
+            title: '¡Éxito!',
+            text: 'La práctica y la evaluación se han registrado correctamente.',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          });
+        })
+        .catch(error => {
+          console.error('Error en el proceso', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error en el proceso de registro.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        });
+    }
+  }
 };
-  </script>
-  
+</script>
+
   <style>
 .espacio{
     margin-top: 100px;

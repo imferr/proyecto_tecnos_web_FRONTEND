@@ -91,7 +91,7 @@
         async loadProfileData() {
           try {
 
-            const studentId = 4;
+            const studentId = 1;
             const response = await axios.get(`http://localhost:8080/api/v1/estudiantes/${studentId}`);
 
             const studentData = response.data.estudiante;

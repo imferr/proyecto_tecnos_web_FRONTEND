@@ -24,8 +24,7 @@
               </div>
             </div>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-              <button>Formulario de solicitud</button>
-              <button>Subir Documentación</button>
+              <button @click="redirigir">Formulario de solicitud </button>
             </div>
             <div class="internship-item">
               <img src="https://i0.wp.com/unitedkingdom.unam.mx/wp-content/uploads/2021/02/academic-exchange-intercambio-academico-unam-united-kingdom-reino-unido.jpg?fit=1944%2C995&ssl=1" alt="INTERCAMBIO MEXICO" />
@@ -36,8 +35,7 @@
               </div>
               </div>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-              <button>Formulario de solicitud</button>
-              <button>Subir Documentación</button>
+              <button @click="redirigir">Formulario de solicitud</button>
             </div>
             <div class="internship-item">
               <img src="https://colombianabroad.com/wp-content/uploads/intercambio-usa.jpg" alt="INTERCAMBIO USA" />
@@ -48,8 +46,7 @@
               </div>
               </div>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam... </p>
-              <button>Formulario de solicitud</button>
-              <button>Subir Documentación</button>
+              <button @click="redirigir">Formulario de solicitud</button>
             </div>
           </div>
         </div>
@@ -218,6 +215,10 @@ export default {
     cancelar() {
       // Navega a la vista anterior en el historial de navegación
       this.$router.go(-1);
+    },
+
+    redirigir() {
+      this.$router.push('/Formulario-Convenio');
     }
   }
 };

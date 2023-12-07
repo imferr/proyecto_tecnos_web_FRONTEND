@@ -13,7 +13,6 @@
             <h1>REGISTRO DE CONVOCATORIAS</h1>
             <h2>Convocatorias publicadas:</h2>
           </div>
-          <button class="add-button" @click="addConvocatoria">AÑADIR REGISTRO DE CONVOCATORIA</button>
         </div>
         <div class="internship-container">
           <div class="internship-list">

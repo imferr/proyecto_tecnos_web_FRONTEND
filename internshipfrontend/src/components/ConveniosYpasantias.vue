@@ -23,7 +23,6 @@
               <button class="add-button" @click="verConvenios">VER CONVENIOS</button>
             </div>
             <div class="internship-item">
-              <button class="small-add-button" @click="formSolicitudPasantia">AÑADIR</button>
               <img src="https://www.avanzaentucarrera.com/orientacion/comp/uploads/2014/02/AETC-vias-de-acceso-a-la-universidad.jpg" alt="REGISTRO CONVOCATORIAS" />
               <div class="title-edit-container">
                 <div class="title-icon-wrapper">
@@ -186,7 +185,7 @@
   .small-add-button {
   position: absolute;
   top: 400px;
-  left: 10px; /* Ajustar según sea necesario */
+  left: 10px; /* Ajustar según sea necesario               <button class="small-add-button" @click="formSolicitudPasantia">AÑADIR</button> */
   background-color: var(--main-blue);
   color: white;
   border: none;

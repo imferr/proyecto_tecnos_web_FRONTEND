@@ -24,8 +24,7 @@
                 </div>
               </div>
               <p>{{ pasantia.descripcion }}</p>
-              <button>Formulario de solicitud</button>
-              <button>Subir Documentación</button>
+              <button @click="redirigir">Formulario de solicitud</button>
             </div>
           </div>
         </div>
@@ -71,6 +70,9 @@ export default {
   methods: {
     cancelar() {
       this.$router.go(-1);
+    },
+    redirigir() {
+      this.$router.push('/Formulario-Convenio');
     }
   },
 };

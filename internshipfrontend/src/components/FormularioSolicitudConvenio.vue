@@ -9,9 +9,9 @@
         <div class="input-group">
           <label for="convenio">Convenio:</label>
           <select id="convenio" placeholder="[seleccione una opcion]">
-            <option value="opcion1">opcion 1</option>
-            <option value="opcion2">opcion 2</option>
-            <option value="opcion3">opcion 3</option>
+            <option value="opcion1">Convenio en Canada</option>
+            <option value="opcion2">Convenio en Argentina</option>
+            <option value="opcion3">Convenio en España</option>
           </select>
         </div>
 

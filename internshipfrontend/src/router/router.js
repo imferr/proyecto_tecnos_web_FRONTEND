@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePageComponent from '../components/HomePageComponent.vue';
 import RegistroUsuarioComponent from '../components/RegistroUsuarioComponent.vue';
 import LoginStudentComponent from '../components/LoginStudentComponent.vue';
-import AgregarConvocatoriaComponent from '../components/AgregarConvocatoriaComponent.vue';
+import AgregarConvocatoriaComponentAdmin from '../components/AgregarConvocatoriaComponentAdmin.vue';
 import AgregarEventosComponentAdmin from '../components/AgregarEventosComponentAdmin.vue';
 import RegistroConvocatoriaComponent from '../components/RegistroConvocatoriaComponent.vue';
 import FormSolicitudPasantiaComponent from '../components/FormSolicitudPasantiaComponent.vue';
@@ -33,7 +33,7 @@ const routes = [
   { path : '/formulario', component: LoginStudentComponent, name: 'registro' },
   { path : '/registroUsuario', component: RegistroUsuarioComponent, name: 'registroUsuario' },
   { path : '/home', component: HomePageComponent, name: 'home' },
-  { path : '/convocatoria', component: AgregarConvocatoriaComponent, name: 'convocatoria' },
+  { path : '/convocatoria', component: AgregarConvocatoriaComponentAdmin, name: 'convocatoria' },
   { path : '/eventos', component: AgregarEventosComponentAdmin, name: 'eventos' },
   { path : '/registroConvocatoria', component: RegistroConvocatoriaComponent, name: 'registroConvocatoria' },
   { path : '/solicitudPasantia', component: FormSolicitudPasantiaComponent, name: 'solicitudPasantia' },
